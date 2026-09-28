@@ -29,6 +29,7 @@ MouseArea {
     required property bool showDate
     required property bool dndEnabled
 
+
     hoverEnabled: true
     activeFocusOnTab: true
 

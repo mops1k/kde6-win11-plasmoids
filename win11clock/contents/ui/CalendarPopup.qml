@@ -31,19 +31,32 @@ PlasmaExtras.Representation {
     required property date currentDate
     required property int firstDayOfWeek
     required property bool showWeekNumbers
+    // Высота доступной области экрана (без панели) — из containment, потому что
+    // Screen.desktopAvailableHeight у откреплённой панели её не учитывает.
+    // Имя с префиксом: у Representation уже есть FINAL-свойство availableHeight.
+    required property int popupAvailableHeight
 
     signal clearAllRequested()
     signal doNotDisturbRequested(bool enabled)
 
     collapseMarginsHint: true
 
-    // Узкий поповер на всю высоту экрана (как в Windows 11).
+    // Узкий поповер на всю высоту рабочего стола (как в Windows 11).
+    // Именно desktopAvailableHeight, а не Screen.height: иначе попап выше
+    // доступной области, не помещается над панелью и перекрывает часы.
     Layout.minimumWidth: Kirigami.Units.gridUnit * 15
     Layout.preferredWidth: Kirigami.Units.gridUnit * 18
     Layout.maximumWidth: Kirigami.Units.gridUnit * 22
-    Layout.minimumHeight: Kirigami.Units.gridUnit * 20
-    Layout.preferredHeight: Screen.height
-    Layout.maximumHeight: Screen.height
+    // Высота всегда от доступной области текущего экрана (без панели) и
+    // обновляется при смене экрана/разрешения/положения панели; минимум
+    // не может превышать её на низких экранах.
+    // implicitHeight/Layout задают размер окна поповера: AppletPopup берёт
+    // size hints из mainItem (Layout.preferredHeight имеет приоритет над
+    // implicitHeight). Без них окно сжимается по содержимому.
+    implicitHeight: root.popupAvailableHeight
+    Layout.minimumHeight: root.popupAvailableHeight
+    Layout.preferredHeight: root.popupAvailableHeight
+    Layout.maximumHeight: root.popupAvailableHeight
 
     header: PlasmaExtras.PlasmoidHeading {
         RowLayout {
@@ -69,6 +82,9 @@ PlasmaExtras.Representation {
     }
 
     contentItem: ColumnLayout {
+        // Окно поповера считает высоту по содержимому: без этого он
+        // сжимается до календаря и не доходит до верха экрана.
+        implicitHeight: 400 - root.topPadding - root.bottomPadding
         spacing: Kirigami.Units.smallSpacing
 
         PlasmaCalendar.EventPluginsManager {

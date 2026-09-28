@@ -131,6 +131,14 @@ upstream:
   явно (`leftPadding`/`rightPadding`, правый больше — 3×smallSpacing).
 - `contents/ui/CalendarPopup.qml` — поповер: уведомления, `MonthView`,
   переключатель «Не беспокоить» в шапке, «Очистить все» под шапкой.
+  Высота берётся из `Plasmoid.containment.availableScreenRect.height`
+  (не `Screen.desktopAvailableHeight`: у откреплённой панели он равен высоте
+  экрана), и растягивается через `implicitHeight` + `Layout.minimumHeight` =
+  `Layout.preferredHeight` = `Layout.maximumHeight` (AppletPopup читает size
+  hints из mainItem; одного `Layout.preferredHeight` недостаточно). Позицию
+  окна задаёт KWin по видимой части панели, поэтому при откреплённой панели
+  поповер встаёт вплотную к её видимой части — через QML это не сдвинуть
+  (`margin` и якорь проверены; свой `AppletPopup` ломает компакт часов).
 - `contents/ui/NotificationItem.qml` — делегат уведомления.
 - `notifications/` — C++ QML-плагин toast-уведомлений: `CMakeLists.txt`,
   `src/` (C++), `NotificationPopup.qml`, `DraggableDelegate.qml`,

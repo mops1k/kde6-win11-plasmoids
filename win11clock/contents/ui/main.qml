@@ -150,6 +150,7 @@ PlasmoidItem {
         currentDate: clock.dateTime
         firstDayOfWeek: Qt.locale().firstDayOfWeek
         showWeekNumbers: Plasmoid.configuration.showWeekNumbers
+        popupAvailableHeight: Plasmoid.containment.availableScreenRect.height
 
         onClearAllRequested: root.clearAllNotifications()
         onDoNotDisturbRequested: enabled => root.setDoNotDisturb(enabled)
@@ -162,4 +163,6 @@ PlasmoidItem {
     // представление в панели) и containment для расчёта геометрии экрана.
     Component.onCompleted: Notifications.Globals.adopt(root)
     Component.onDestruction: Notifications.Globals.forget()
+
+
 }
