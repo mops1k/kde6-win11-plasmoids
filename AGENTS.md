@@ -9,7 +9,10 @@ Plasma 6: `win11tray`, `win11tasks` (C++/CMake) и `win11battery`,
 
 - Язык общения, документации и комментариев — русский; сообщения коммитов —
   английский, краткая императивная строка.
-- Коммиты и push — только по прямой просьбе пользователя. Remote не настроен.
+- Коммиты и push — только по прямой просьбе пользователя. Remote:
+  `origin` = `git@github.com:mops1k/kde6-win11-plasmoids.git`, рабочая ветка
+  `main`. Из песочницы DSH (workspace-write) git к GitHub работает только с
+  `GIT_SSH_COMMAND='ssh -F /dev/null -o BatchMode=yes'`.
 - В коммит не попадают: референс-скриншоты (`Screenshot*.png`), `build/`,
   `build-*/`, `dist/`, `*.plasmoid`, `.dsh/` (планы и состояние сессий DSH).
 - Идентичность репозитория задана локально: `mops1k`
