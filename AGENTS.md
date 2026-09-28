@@ -20,6 +20,14 @@ Plasma 6: `win11tray`, `win11tasks` (C++/CMake) и `win11battery`,
 - Установка всех плазмоидов — `./scripts/install.sh` (whiptail-выбор,
   `--all`, `--only`, `--list`, `--no-restart`); реальная установка меняет
   `~/.local` и перезапускает `plasmashell`.
+- Режим «плавающей» панели — `./scripts/panel-floating.sh`
+  (`status`/`off`/`on`/`toggle`, `--panel <id|all>`, `--no-persist`):
+  в Plasma 6 панель сама открепляется на рабочем столе, и поповеры панельных
+  апплетов заезжают на апплет. Состояние хранится в
+  `[PlasmaViews][Panel <id>] floating=0/1` файла
+  `~/.config/plasma-org.kde.plasma.desktop-appletsrc` (`PanelView::setFloating`
+  в `shell/panelview.cpp`); без `--no-persist` скрипт пишет ключ при
+  остановленном `plasmashell`, с бэкапом конфига.
 - Проектные правила и детали сборки держать в `AGENTS.md` соответствующего
   каталога, а не здесь.
 - Перед правкой файла — прочитать его; деструктивные операции (удаление,

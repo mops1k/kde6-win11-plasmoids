@@ -34,6 +34,21 @@ C++-плазмоиды собираются CMake (`build/`), QML-плазмои
 `win11clock/scripts/switch-clock.sh`, `win11battery/scripts/switch-battery.sh`,
 `win11keyboardlayout/scripts/switch-widget.sh`.
 
+Режим «плавающей» панели (в Plasma 6 панель сама открепляется на рабочем
+столе, из-за чего поповеры панельных апплетов заезжают на апплет) —
+`scripts/panel-floating.sh`:
+
+```bash
+./scripts/panel-floating.sh status   # показать режим панелей
+./scripts/panel-floating.sh off      # прикрепить к краям экрана
+./scripts/panel-floating.sh on       # вернуть авто-открепление
+./scripts/panel-floating.sh toggle   # переключить
+```
+
+Без `--no-persist` настройка сохраняется в `plasma-org.kde.plasma.desktop-appletsrc`
+(`[PlasmaViews][Panel <id>] floating=0/1`) при остановленном `plasmashell`,
+с бэкапом конфига.
+
 ## Откат
 
 ```bash
