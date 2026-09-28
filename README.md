@@ -37,6 +37,30 @@
 
 ## Установка
 
+### 1. Требования
+
+KDE Plasma 6 на Wayland (KWin). Проверено на Plasma 6.7.5, Qt 6.11.2, KF6 6.30
+(CachyOS/Arch). Пакеты для сборки:
+
+```bash
+sudo pacman -S --needed base-devel cmake extra-cmake-modules kpackage gettext \
+    qt6-wayland wayland plasma-workspace plasma-wayland-protocols \
+    plasma-activities plasma-activities-stats libksysguard
+```
+
+Остальные Qt6/KF6-модули приходят зависимостями `plasma-workspace`.
+`powerdevil` нужен для win11battery (системное меню «Питание и батарея»),
+`python3` и `git` — для скриптов правки `appletsrc` и клонирования.
+
+### 2. Клонирование
+
+```bash
+git clone https://github.com/mops1k/kde6-win11-plasmoids.git
+cd kde6-win11-plasmoids
+```
+
+### 3. Установка плазмоидов
+
 ```bash
 ./scripts/install.sh              # интерактивный выбор (whiptail-чекбоксы)
 ./scripts/install.sh --all        # установить все
@@ -44,18 +68,48 @@
 ./scripts/install.sh --list       # только показать список
 ```
 
-C++-плазмоиды собираются CMake (`build/`), QML-плазмоиды ставятся
-`kpackagetool6`. Установка идёт в `~/.local` без root; `plasmashell`
-перезапускается один раз в конце (`--no-restart` отключает).
+Что делает установщик (всё в `~/.local`, root не нужен):
 
-Замена системных апплетов в панели — отдельными скриптами проекта:
-`win11tray/scripts/switch-tray.sh`, `win11tasks/scripts/switch-tasks.sh`,
-`win11clock/scripts/switch-clock.sh`, `win11battery/scripts/switch-battery.sh`,
-`win11keyboardlayout/scripts/switch-widget.sh`.
+- C++-плазмоиды `win11tray` и `win11tasks` собираются CMake в `build/`,
+  плагины ставятся в `~/.local/lib/qt6/plugins/plasma/applets`;
+- QML-плазмоиды `win11battery`, `win11clock`, `win11keyboardlayout` ставятся
+  `kpackagetool6` в `~/.local/share/plasma/plasmoids`;
+- C++ QML-плагин уведомлений `win11clock/notifications` собирается в
+  `~/.local/lib/qt6/qml/org/mops1k/win11clock/notifications`;
+- переводы (`.mo`) ставятся в `~/.local/share/locale`;
+- создаются systemd drop-in'ы `~/.config/systemd/user/plasma-plasmashell.service.d/`
+  с `QT_PLUGIN_PATH` и `QML_IMPORT_PATH` — без них plasmashell не увидит
+  C++-плагины;
+- `plasmashell` перезапускается один раз в конце (`--no-restart` отключает).
 
-Режим «плавающей» панели (в Plasma 6 панель сама открепляется на рабочем
-столе, из-за чего поповеры панельных апплетов заезжают на апплет) —
-`scripts/panel-floating.sh`:
+### 4. Сборка панели как на скриншоте
+
+Сначала заменить системные апплеты на свои (каждый скрипт делает бэкап
+`~/.config/plasma-org.kde.plasma.desktop-appletsrc` и правит его при
+остановленном `plasmashell`; `--revert` возвращает системный апплет):
+
+```bash
+win11tasks/scripts/switch-tasks.sh            # таскбар вместо системного icontasks
+win11tray/scripts/switch-tray.sh              # трей вместо системного
+win11clock/scripts/switch-clock.sh            # часы вместо digitalclock
+win11battery/scripts/switch-battery.sh        # батарея внутрь трея
+win11keyboardlayout/scripts/switch-widget.sh  # индикатор раскладки внутрь трея
+```
+
+Затем панель (правый клик по панели → «Настроить панель…»):
+
+- положение — снизу, высота — 48 px;
+- снять «Плавающая», иначе в Plasma 6 панель сама открепляется на рабочем
+  столе и поповеры заезжают на апплет (то же самое делает
+  `./scripts/panel-floating.sh off`, см. ниже);
+- порядок апплетов: таскбар | разделитель | трей (внутри него — батарея,
+  индикатор раскладки и системные значки) | часы; часы — последними справа.
+
+Тема оформления на скриншотах — Orchis-dark
+(`com.github.vinceliuice.Orchis-dark`), но она не обязательна: плазмоиды
+рисуются в текущей теме Plasma.
+
+### 5. Режим «плавающей» панели
 
 ```bash
 ./scripts/panel-floating.sh status   # показать режим панелей
@@ -67,6 +121,17 @@ C++-плазмоиды собираются CMake (`build/`), QML-плазмои
 Без `--no-persist` настройка сохраняется в `plasma-org.kde.plasma.desktop-appletsrc`
 (`[PlasmaViews][Panel <id>] floating=0/1`) при остановленном `plasmashell`,
 с бэкапом конфига.
+
+### 6. Проверка
+
+```bash
+journalctl --user -u plasma-plasmashell -b --since "-40s" \
+    | grep -iE "error when loading|TypeError|ReferenceError"
+```
+
+Вывод должен быть пустым. Если апплет не появился — проверить, что
+`plasmashell` действительно перезапустился (drop-in'ы подхватываются только
+при старте) и что в журнале нет ошибок загрузки QML.
 
 ## Откат
 
