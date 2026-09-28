@@ -1,0 +1,28 @@
+{
+    "KPlugin": {
+        "Authors": [
+            {
+                "Email": "hein@kde.org",
+                "Name": "Eike Hein"
+            },
+            {
+                "Email": "jeysef@users.noreply.github.com",
+                "Name": "Jeysef"
+            }
+        ],
+        "Category": "Windows and Tasks",
+        "Description": "Windows 11 style icons-only task manager with preview tooltips",
+        "Description[ru]": "Панель задач в стиле Windows 11: только значки, с превью окон в подсказках",
+        "EnabledByDefault": true,
+        "Icon": "preferences-system-windows",
+        "License": "GPL-3.0-or-later",
+        "Name": "Win11 Tasks",
+        "Name[ru]": "Панель задач Win11",
+        "Version": "0.1.0"
+    },
+    "X-Plasma-API-Minimum-Version": "6.0",
+    "X-Plasma-Provides": [
+        "org.kde.plasma.multitasking"
+    ],
+    "KPackageStructure": "Plasma/Applet"
+}

@@ -1,0 +1,312 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: plasma_applet_org.mops1k.win11tray\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-09-27 06:43+0300\n"
+"Language: ru\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+
+#: contents/ui/BackgroundAppItem.qml:76
+msgctxt "@action:inmenu"
+msgid "Quit %1"
+msgstr "Выйти из %1"
+
+#: contents/ui/components/BatteryTile.qml:26
+msgctxt "@item:label Quick settings tile opening the power management page"
+msgid "Power"
+msgstr "Электропитание"
+
+#: contents/ui/components/BatteryTile.qml:30
+#, javascript-format
+msgctxt ""
+"@info:tooltip Quick settings tile, %1 is the battery charge in percent"
+msgid "Power — charging (%1%)"
+msgstr "Электропитание — зарядка (%1%)"
+
+#: contents/ui/components/BatteryTile.qml:31
+#, javascript-format
+msgctxt ""
+"@info:tooltip Quick settings tile, %1 is the battery charge in percent"
+msgid "Power — %1%"
+msgstr "Электропитание — %1%"
+
+#: contents/ui/config.qml:13
+msgid "General"
+msgstr "Основное"
+
+#: contents/ui/ExpanderArrow.qml:26
+msgid "Close popup"
+msgstr "Закрыть всплывающее окно"
+
+#: contents/ui/ExpanderArrow.qml:26
+msgid "Show hidden icons"
+msgstr "Показать скрытые значки"
+
+#: contents/ui/ExpanderArrow.qml:27
+msgid "Show all the items in the system tray in a popup"
+msgstr "Показать все элементы системного трея во всплывающем окне"
+
+#: contents/ui/ExpandedRepresentation.qml:96
+msgctxt "@action:button"
+msgid "Go Back"
+msgstr "Назад"
+
+#: contents/ui/ExpandedRepresentation.qml:109
+msgid "Status and Notifications"
+msgstr "Состояние и уведомления"
+
+#: contents/ui/ExpandedRepresentation.qml:162
+msgid "More actions"
+msgstr "Больше действий"
+
+#: contents/ui/ExpandedRepresentation.qml:210
+msgid "Keep Open"
+msgstr "Держать окно открытым"
+
+#: contents/ui/ConfigGeneral.qml:53
+msgctxt "@item:inlistbox Show this System Tray item when relevant"
+msgid "Show when relevant"
+msgstr "Показывать при необходимости"
+
+#: contents/ui/ConfigGeneral.qml:57
+msgctxt "@item:inlistbox Always show this System Tray item"
+msgid "Always show"
+msgstr "Показывать всегда"
+
+#: contents/ui/ConfigGeneral.qml:61
+msgctxt "@item:inlistbox Show this System Tray item only in the expanded popup"
+msgid "Show only in popup"
+msgstr "Показывать только во всплывающем окне"
+
+#: contents/ui/ConfigGeneral.qml:65
+msgctxt "@item:inlistbox Never show this System Tray item; disable it"
+msgid "Never show (disabled)"
+msgstr "Никогда не показывать (отключено)"
+
+#: contents/ui/ConfigGeneral.qml:136
+msgid "Application Status"
+msgstr "Состояния приложений"
+
+#: contents/ui/ConfigGeneral.qml:138
+msgid "Communications"
+msgstr "Связь"
+
+#: contents/ui/ConfigGeneral.qml:140
+msgid "System Services"
+msgstr "Системные службы"
+
+#: contents/ui/ConfigGeneral.qml:142
+msgid "Hardware Control"
+msgstr "Управление оборудованием"
+
+#: contents/ui/ConfigGeneral.qml:145
+msgid "Miscellaneous"
+msgstr "Прочее"
+
+#: contents/ui/ConfigGeneral.qml:182
+msgctxt "@info:usagetip"
+msgid ""
+"Look for a setting in <application>%1</application> to disable its tray icon "
+"before doing it here. Some apps’ tray icons were not designed to be "
+"disabled, and using this setting may cause them to behave unexpectedly.<nl/"
+"><nl/>Use this setting at your own risk, and do not report issues to KDE or "
+"the app’s author."
+msgstr ""
+"Поищите в настройках <application>%1</application> возможность отключить его "
+"значок в трее — делать это здесь стоит только в крайнем случае. Некоторые "
+"значки в трее не рассчитаны на отключение, и этот параметр может привести к "
+"неожиданному поведению приложения.<nl/><nl/>Используйте его на свой риск и "
+"не сообщайте о проблемах в KDE или автору приложения."
+
+#: contents/ui/ConfigGeneral.qml:185
+msgctxt "@action:button"
+msgid "I understand the risks"
+msgstr "Я понимаю и принимаю риски"
+
+#: contents/ui/ConfigGeneral.qml:197
+msgctxt "@info:usagetip"
+msgid ""
+"Disabling the clipboard is not recommended, as it will cause copied data to "
+"be lost when the application it was copied from is closed.<nl/><nl/>Only do "
+"this if you’ve manually added a standalone Clipboard widget somewhere else, "
+"or are using a 3rd-party clipboard manager. Also, instead consider "
+"configuring the clipboard to not save history, or to only remember one item "
+"at a time."
+msgstr ""
+"Отключать буфер обмена не рекомендуется: скопированные данные будут потеряны "
+"при закрытии приложения, из которого они скопированы.<nl/><nl/>Делайте это "
+"только если вы вручную добавили отдельный виджет буфера обмена в другом "
+"месте или используете сторонний менеджер буфера обмена. Вместо этого "
+"попробуйте настроить буфер обмена так, чтобы он не сохранял историю или "
+"запоминал только один элемент за раз."
+
+#: contents/ui/ConfigGeneral.qml:206
+msgctxt "@info:usagetip"
+msgid ""
+"Disabling the Notifications widget is not recommended, as notifications sent "
+"by apps will no longer be shown.<nl/><nl/>Only do this if you’ve manually "
+"added a standalone Notifications widget somewhere else, or are intentionally "
+"using a 3rd-party notification manager to handle notifications."
+msgstr ""
+"Отключать виджет уведомлений не рекомендуется: уведомления от приложений "
+"больше не будут показываться.<nl/><nl/>Делайте это только если вы вручную "
+"добавили отдельный виджет уведомлений в другом месте или намеренно "
+"используете сторонний менеджер уведомлений."
+
+#: contents/ui/ConfigGeneral.qml:218
+msgctxt "@item:inlistbox Icon size"
+msgid "Scale with Panel height"
+msgstr "Масштабировать по высоте панели"
+
+#: contents/ui/ConfigGeneral.qml:219
+msgctxt "@item:inlistbox Icon size"
+msgid "Scale with Panel width"
+msgstr "Масштабировать по ширине панели"
+
+#: contents/ui/ConfigGeneral.qml:221
+msgctxt ""
+"@label:listbox Whether the system tray icons in the Panel always stay small "
+"or scale with the Panel's size"
+msgid "Panel icon size:"
+msgstr "Размер значков на панели:"
+
+#: contents/ui/ConfigGeneral.qml:225
+msgctxt "@item:inlistbox Icon size"
+msgid "Small (22 px)"
+msgstr "Маленький (22 px)"
+
+#: contents/ui/ConfigGeneral.qml:233
+msgctxt "@item:inlistbox Icon size"
+msgid "Custom size in pixels"
+msgstr "Свой размер в пикселях"
+
+#: contents/ui/ConfigGeneral.qml:255
+msgctxt "@label:spinbox Custom tray icon size in pixels"
+msgid "Icon size (px):"
+msgstr "Размер значка (px):"
+
+#: contents/ui/ConfigGeneral.qml:268
+msgctxt "@label:listbox The spacing between system tray icons in the Panel"
+msgid "Spacing:"
+msgstr "Интервал:"
+
+#: contents/ui/ConfigGeneral.qml:272
+msgctxt "@item:inlistbox Icon spacing"
+msgid "Small"
+msgstr "Маленький"
+
+#: contents/ui/ConfigGeneral.qml:276
+msgctxt "@item:inlistbox Icon spacing"
+msgid "Normal"
+msgstr "Обычный"
+
+#: contents/ui/ConfigGeneral.qml:280
+msgctxt "@item:inlistbox Icon spacing"
+msgid "Large"
+msgstr "Большой"
+
+#: contents/ui/ConfigGeneral.qml:300
+msgctxt ""
+"@label:spinbox Maximum number of tray icons shown in the panel; the rest go "
+"to the hidden icons popup"
+msgid "Max icons in panel:"
+msgstr "Максимум значков в панели:"
+
+#: contents/ui/ConfigGeneral.qml:307 contents/ui/ConfigGeneral.qml:309
+msgctxt "@item:inlistbox Unlimited number of tray icons"
+msgid "Unlimited"
+msgstr "Без ограничения"
+
+#: contents/ui/ConfigGeneral.qml:320
+msgctxt ""
+"@label:listbox Which direction system tray icons in the Panel emerge from "
+"the expander arrow"
+msgid "Direction:"
+msgstr "Направление:"
+
+#: contents/ui/ConfigGeneral.qml:334
+msgid "Bottom-to-top"
+msgstr "Снизу вверх"
+
+#: contents/ui/ConfigGeneral.qml:335
+msgid "Top-to-bottom"
+msgstr "Сверху вниз"
+
+#: contents/ui/ConfigGeneral.qml:340 contents/ui/ConfigGeneral.qml:347
+msgid "Left-to-right"
+msgstr "Слева направо"
+
+#: contents/ui/ConfigGeneral.qml:341 contents/ui/ConfigGeneral.qml:346
+msgid "Right-to-left"
+msgstr "Справа налево"
+
+#: contents/ui/ConfigGeneral.qml:358
+msgctxt "@info:usagetip under a combobox when Touch Mode is on"
+msgid "Automatically set to Large when in Touch Mode"
+msgstr "В режиме планшета автоматически используется большой интервал"
+
+#: contents/ui/ConfigGeneral.qml:364
+msgctxt "@label:checkbox Which icons the panel status row shows"
+msgid "Status row icons:"
+msgstr "Значки статусной строки:"
+
+#: contents/ui/ConfigGeneral.qml:365
+msgctxt "@option:check System status row icon in the panel"
+msgid "Network"
+msgstr "Сеть"
+
+#: contents/ui/ConfigGeneral.qml:372
+msgctxt "@option:check System status row icon in the panel"
+msgid "Sound"
+msgstr "Звук"
+
+#: contents/ui/ConfigGeneral.qml:379
+msgctxt "@option:check System status row icon in the panel"
+msgid "Brightness"
+msgstr "Яркость"
+
+#: contents/ui/ConfigGeneral.qml:386
+msgctxt "@option:check System status row icon in the panel"
+msgid "Battery"
+msgstr "Батарея"
+
+#: contents/ui/ConfigGeneral.qml:394
+msgctxt ""
+"@label:spinbox Gap in pixels between the system tray icons and the panel "
+"status row"
+msgid "Status row gap (px):"
+msgstr "Отступ статусного ряда (px):"
+
+#: contents/ui/ConfigGeneral.qml:423
+msgctxt "@title:column"
+msgid "Entries"
+msgstr "Элементы"
+
+#: contents/ui/ConfigGeneral.qml:427
+msgctxt "@option:check, This is referring to system tray entries"
+msgid "Always show all"
+msgstr "Всегда показывать все"
+
+#~ msgctxt "@info:tooltip"
+#~ msgid "Network"
+#~ msgstr "Сеть"
+
+#~ msgctxt "@info:tooltip"
+#~ msgid "Sound — muted"
+#~ msgstr "Звук — выключен"
+
+#~ msgctxt "@info:tooltip"
+#~ msgid "Sound"
+#~ msgstr "Звук"
+
+#~ msgctxt "@info:tooltip"
+#~ msgid "Brightness"
+#~ msgstr "Яркость"
+
+#~ msgctxt "@info:tooltip"
+#~ msgid "Battery"
+#~ msgstr "Батарея"

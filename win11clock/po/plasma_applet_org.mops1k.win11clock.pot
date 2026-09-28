@@ -1,0 +1,216 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the plasma_applet_org.mops1k.win11clock package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: plasma_applet_org.mops1k.win11clock 0.1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-09-28 14:40+0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+
+#: contents/ui/CalendarPopup.qml:57
+msgid "Notifications"
+msgstr ""
+
+#: contents/ui/CalendarPopup.qml:65
+msgid "Do not disturb"
+msgstr ""
+
+#: contents/ui/CalendarPopup.qml:90
+msgid "Clear all"
+msgstr ""
+
+#: contents/ui/CalendarPopup.qml:127
+msgid "No notifications"
+msgstr ""
+
+#: contents/ui/main.qml:123
+msgid "Clock"
+msgstr ""
+
+#: contents/ui/NotificationItem.qml:145
+msgid "Dismiss"
+msgstr ""
+
+#: contents/ui/NotificationItem.qml:183
+#, javascript-format
+msgctxt "@info:progress percentage of a running job"
+msgid "%1%"
+msgstr ""
+
+#: contents/ui/NotificationItem.qml:220
+msgid "Open"
+msgstr ""
+
+#: contents/ui/NotificationItem.qml:226
+msgid "Details"
+msgstr ""
+
+#: contents/ui/NotificationItem.qml:233
+msgid "Resume"
+msgstr ""
+
+#: contents/ui/NotificationItem.qml:233
+msgid "Pause"
+msgstr ""
+
+#: contents/ui/NotificationItem.qml:245
+msgid "Cancel"
+msgstr ""
+
+#: contents/ui/NotificationItem.qml:259
+msgid "Reply…"
+msgstr ""
+
+#: contents/ui/NotificationItem.qml:263
+msgid "Send"
+msgstr ""
+
+#: contents/ui/config/ConfigGeneral.qml:45
+msgid "Time:"
+msgstr ""
+
+#: contents/ui/config/ConfigGeneral.qml:46
+msgid "Use 24-hour format"
+msgstr ""
+
+#: contents/ui/config/ConfigGeneral.qml:52
+msgid "Show seconds"
+msgstr ""
+
+#: contents/ui/config/ConfigGeneral.qml:57
+msgid "Date:"
+msgstr ""
+
+#: contents/ui/config/ConfigGeneral.qml:58
+msgid "Show the date below the time"
+msgstr ""
+
+#: contents/ui/config/ConfigGeneral.qml:64
+msgid "Show day of week"
+msgstr ""
+
+#: contents/ui/config/ConfigGeneral.qml:70
+msgid "Date format:"
+msgstr ""
+
+#: contents/ui/config/ConfigGeneral.qml:74
+msgid "Short (locale)"
+msgstr ""
+
+#: contents/ui/config/ConfigGeneral.qml:75
+msgid "ISO (2026-09-27)"
+msgstr ""
+
+#: contents/ui/config/ConfigGeneral.qml:76
+msgid "Long (locale)"
+msgstr ""
+
+#: contents/ui/config/ConfigGeneral.qml:77
+msgid "Custom"
+msgstr ""
+
+#: contents/ui/config/ConfigGeneral.qml:87
+msgid "Custom format:"
+msgstr ""
+
+#: contents/ui/config/ConfigGeneral.qml:100
+msgid "Position:"
+msgstr ""
+
+#: contents/ui/config/ConfigGeneral.qml:104
+msgid "Right (like Windows 11)"
+msgstr ""
+
+#: contents/ui/config/ConfigGeneral.qml:105
+msgid "Center"
+msgstr ""
+
+#: contents/ui/config/ConfigGeneral.qml:106
+msgid "Left"
+msgstr ""
+
+#: contents/ui/config/ConfigGeneral.qml:116
+msgid "Font family:"
+msgstr ""
+
+#: contents/ui/config/ConfigGeneral.qml:122
+msgid "Default (from Plasma theme)"
+msgstr ""
+
+#: contents/ui/config/ConfigGeneral.qml:128
+msgid "Time font size:"
+msgstr ""
+
+#: contents/ui/config/ConfigGeneral.qml:133
+#: contents/ui/config/ConfigGeneral.qml:145
+msgid "Automatic"
+msgstr ""
+
+#: contents/ui/config/ConfigGeneral.qml:140
+msgid "Date font size:"
+msgstr ""
+
+#: contents/ui/config/ConfigGeneral.qml:151
+msgid "Draw the time in bold"
+msgstr ""
+
+#: contents/ui/config/ConfigGeneral.qml:156
+msgid "Custom text color"
+msgstr ""
+
+#: contents/ui/config/ConfigGeneral.qml:160
+msgid "Text color:"
+msgstr ""
+
+#: contents/ui/config/ConfigGeneral.qml:172
+msgid "Choose…"
+msgstr ""
+
+#: contents/ui/config/ConfigGeneral.qml:184
+msgid "Calendar:"
+msgstr ""
+
+#: contents/ui/config/ConfigGeneral.qml:185
+msgid "Show week numbers"
+msgstr ""
+
+#: contents/ui/config/ConfigGeneral.qml:191
+msgid "Popup:"
+msgstr ""
+
+#: contents/ui/config/ConfigGeneral.qml:196
+msgid "%1 notification"
+msgid_plural "%1 notifications"
+msgstr[0] ""
+msgstr[1] ""
+
+#: contents/ui/config/ConfigGeneral.qml:203
+msgid "Keep expired and dismissed notifications (history)"
+msgstr ""
+
+#: contents/ui/config/ConfigGeneral.qml:209
+msgid "Show low priority notifications"
+msgstr ""
+
+#: contents/ui/config/ConfigGeneral.qml:215
+msgid "Show jobs (file transfers, downloads)"
+msgstr ""
+
+#: contents/ui/config/ConfigGeneral.qml:221
+msgid "Show “Do not disturb” switch"
+msgstr ""
+
+#: contents/ui/config/ConfigGeneral.qml:227
+msgid "Text color"
+msgstr ""

@@ -1,0 +1,34 @@
+{
+    "KPackageStructure": "Plasma/Applet",
+    "KPlugin": {
+        "Authors": [
+            {
+                "Name": "mops1k"
+            }
+        ],
+        "Category": "Windows and Tasks",
+        "Description": "Windows 11 / Android style battery indicator: charge percentage inside the battery icon",
+        "Description[ru]": "Индикатор батареи в стиле Windows 11 / Android: процент заряда внутри иконки батареи",
+        "EnabledByDefault": true,
+        "FormFactors": [
+            "desktop",
+            "horizontal",
+            "vertical",
+            "planar"
+        ],
+        "Icon": "battery-good",
+        "Id": "org.mops1k.win11battery",
+        "License": "GPL-3.0-or-later",
+        "Name": "Win11 Battery",
+        "Name[ru]": "Батарея Win11",
+        "Version": "0.1.0"
+    },
+    "X-Plasma-API-Minimum-Version": "6.0",
+    "X-Plasma-MainScript": "ui/main.qml",
+    "X-Plasma-NotificationArea": "true",
+    "X-Plasma-NotificationAreaCategory": "Hardware",
+    "X-Plasma-Provides": [
+        "org.kde.plasma.powermanagement"
+    ],
+    "X-Plasma-DBusActivationService": "org.kde.Solid.PowerManagement"
+}

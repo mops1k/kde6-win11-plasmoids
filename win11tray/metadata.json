@@ -1,0 +1,25 @@
+{
+    "KPackageStructure": "Plasma/Applet",
+    "KPlugin": {
+        "Authors": [
+            {
+                "Email": "jeysef@users.noreply.github.com",
+                "Name": "Jeysef"
+            }
+        ],
+        "Category": "Windows and Tasks",
+        "Description": "Windows 11 style system tray: status icons, hidden icons flyout and quick settings",
+        "Description[ru]": "Системный трей в стиле Windows 11: значки состояния, скрытые значки и быстрые настройки",
+        "EnabledByDefault": true,
+        "FormFactors": [
+            "desktop"
+        ],
+        "Icon": "preferences-system-windows",
+        "License": "GPL-3.0-or-later",
+        "Name": "Win11 Tray",
+        "Name[ru]": "Трей Win11",
+        "Version": "0.1.0"
+    },
+    "X-Plasma-API-Minimum-Version": "6.0",
+    "X-Plasma-ContainmentType": "CustomEmbedded"
+}

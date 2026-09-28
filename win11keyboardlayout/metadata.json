@@ -1,0 +1,30 @@
+{
+    "KPackageStructure": "Plasma/Applet",
+    "KPlugin": {
+        "Authors": [
+            {
+                "Name": "mops1k"
+            }
+        ],
+        "Category": "Windows and Tasks",
+        "Description": "Windows 11 style keyboard layout indicator: text code (РУС/ENG) with configurable font",
+        "Description[ru]": "Индикатор раскладки клавиатуры в стиле Windows 11: текстовый код (РУС/ENG) с настраиваемым шрифтом",
+        "EnabledByDefault": true,
+        "FormFactors": [
+            "desktop",
+            "horizontal",
+            "vertical",
+            "planar"
+        ],
+        "Icon": "input-keyboard",
+        "Id": "org.mops1k.win11keyboardlayout",
+        "License": "GPL-3.0-or-later",
+        "Name": "Win11 Keyboard Layout",
+        "Name[ru]": "Раскладка клавиатуры Win11",
+        "Version": "0.1.0"
+    },
+    "X-Plasma-API-Minimum-Version": "6.0",
+    "X-Plasma-MainScript": "ui/main.qml",
+    "X-Plasma-NotificationArea": "true",
+    "X-Plasma-NotificationAreaCategory": "Hardware"
+}

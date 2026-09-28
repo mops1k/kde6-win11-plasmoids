@@ -1,0 +1,202 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: plasma_applet_org.mops1k.win11clock\n"
+"Report-Msgid-Bugs-To: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: ru\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+
+#: contents/ui/CalendarPopup.qml:57
+msgid "Notifications"
+msgstr "Уведомления"
+
+#: contents/ui/CalendarPopup.qml:65
+msgid "Do not disturb"
+msgstr "Не беспокоить"
+
+#: contents/ui/CalendarPopup.qml:90
+msgid "Clear all"
+msgstr "Очистить все"
+
+#: contents/ui/CalendarPopup.qml:127
+msgid "No notifications"
+msgstr "Нет уведомлений"
+
+#: contents/ui/main.qml:123
+msgid "Clock"
+msgstr "Часы"
+
+#: contents/ui/NotificationItem.qml:145
+msgid "Dismiss"
+msgstr "Закрыть"
+
+#: contents/ui/NotificationItem.qml:220
+msgid "Open"
+msgstr "Открыть"
+
+#: contents/ui/NotificationItem.qml:226
+msgid "Details"
+msgstr "Подробности"
+
+#: contents/ui/NotificationItem.qml:233
+msgid "Resume"
+msgstr "Продолжить"
+
+#: contents/ui/NotificationItem.qml:233
+msgid "Pause"
+msgstr "Пауза"
+
+#: contents/ui/NotificationItem.qml:245
+msgid "Cancel"
+msgstr "Отмена"
+
+#: contents/ui/NotificationItem.qml:259
+msgid "Reply…"
+msgstr "Ответить…"
+
+#: contents/ui/NotificationItem.qml:263
+msgid "Send"
+msgstr "Отправить"
+
+#: contents/ui/config/ConfigGeneral.qml:45
+msgid "Time:"
+msgstr "Время:"
+
+#: contents/ui/config/ConfigGeneral.qml:46
+msgid "Use 24-hour format"
+msgstr "24-часовой формат"
+
+#: contents/ui/config/ConfigGeneral.qml:52
+msgid "Show seconds"
+msgstr "Показывать секунды"
+
+#: contents/ui/config/ConfigGeneral.qml:57
+msgid "Date:"
+msgstr "Дата:"
+
+#: contents/ui/config/ConfigGeneral.qml:58
+msgid "Show the date below the time"
+msgstr "Показывать дату под временем"
+
+#: contents/ui/config/ConfigGeneral.qml:64
+msgid "Show day of week"
+msgstr "Показывать день недели"
+
+#: contents/ui/config/ConfigGeneral.qml:70
+msgid "Date format:"
+msgstr "Формат даты:"
+
+#: contents/ui/config/ConfigGeneral.qml:74
+msgid "Short (locale)"
+msgstr "Короткий (по локали)"
+
+#: contents/ui/config/ConfigGeneral.qml:75
+msgid "ISO (2026-09-27)"
+msgstr "ISO (2026-09-27)"
+
+#: contents/ui/config/ConfigGeneral.qml:76
+msgid "Long (locale)"
+msgstr "Длинный (по локали)"
+
+#: contents/ui/config/ConfigGeneral.qml:77
+msgid "Custom"
+msgstr "Свой"
+
+#: contents/ui/config/ConfigGeneral.qml:87
+msgid "Custom format:"
+msgstr "Свой формат:"
+
+#: contents/ui/config/ConfigGeneral.qml:100
+msgid "Position:"
+msgstr "Положение:"
+
+#: contents/ui/config/ConfigGeneral.qml:104
+msgid "Right (like Windows 11)"
+msgstr "Справа (как в Windows 11)"
+
+#: contents/ui/config/ConfigGeneral.qml:105
+msgid "Center"
+msgstr "По центру"
+
+#: contents/ui/config/ConfigGeneral.qml:106
+msgid "Left"
+msgstr "Слева"
+
+#: contents/ui/config/ConfigGeneral.qml:116
+msgid "Font family:"
+msgstr "Семейство шрифта:"
+
+#: contents/ui/config/ConfigGeneral.qml:122
+msgid "Default (from Plasma theme)"
+msgstr "По умолчанию (из темы Plasma)"
+
+#: contents/ui/config/ConfigGeneral.qml:128
+msgid "Time font size:"
+msgstr "Размер шрифта времени:"
+
+#: contents/ui/config/ConfigGeneral.qml:133
+#: contents/ui/config/ConfigGeneral.qml:145
+msgid "Automatic"
+msgstr "Автоматически"
+
+#: contents/ui/config/ConfigGeneral.qml:140
+msgid "Date font size:"
+msgstr "Размер шрифта даты:"
+
+#: contents/ui/config/ConfigGeneral.qml:151
+msgid "Draw the time in bold"
+msgstr "Рисовать время полужирным"
+
+#: contents/ui/config/ConfigGeneral.qml:156
+msgid "Custom text color"
+msgstr "Свой цвет текста"
+
+#: contents/ui/config/ConfigGeneral.qml:160
+msgid "Text color:"
+msgstr "Цвет текста:"
+
+#: contents/ui/config/ConfigGeneral.qml:172
+msgid "Choose…"
+msgstr "Выбрать…"
+
+#: contents/ui/config/ConfigGeneral.qml:184
+msgid "Calendar:"
+msgstr "Календарь:"
+
+#: contents/ui/config/ConfigGeneral.qml:185
+msgid "Show week numbers"
+msgstr "Показывать номера недель"
+
+#: contents/ui/config/ConfigGeneral.qml:191
+msgid "Popup:"
+msgstr "Поповер:"
+
+#: contents/ui/config/ConfigGeneral.qml:196
+msgid "%1 notification"
+msgid_plural "%1 notifications"
+msgstr[0] "%1 уведомление"
+msgstr[1] "%1 уведомления"
+msgstr[2] "%1 уведомлений"
+
+#: contents/ui/config/ConfigGeneral.qml:203
+msgid "Keep expired and dismissed notifications (history)"
+msgstr "Хранить закрытые и истёкшие уведомления (история)"
+
+#: contents/ui/config/ConfigGeneral.qml:209
+msgid "Show low priority notifications"
+msgstr "Показывать уведомления низкого приоритета"
+
+#: contents/ui/config/ConfigGeneral.qml:215
+msgid "Show jobs (file transfers, downloads)"
+msgstr "Показывать задания (передача файлов, загрузки)"
+
+#: contents/ui/config/ConfigGeneral.qml:221
+msgid "Show “Do not disturb” switch"
+msgstr "Показывать переключатель «Не беспокоить»"
+
+#: contents/ui/config/ConfigGeneral.qml:227
+msgid "Text color"
+msgstr "Цвет текста"

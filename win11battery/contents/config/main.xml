@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kcfg xmlns="http://www.kde.org/standards/kcfg/1.0"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.kde.org/standards/kcfg/1.0
+      http://www.kde.org/standards/kcfg/1.0/kcfg.xsd" >
+    <kcfgfile name=""/>
+
+    <group name="General">
+        <entry name="showPercentage" type="bool">
+            <label>If true, the battery will display a little charge percentage label inside.</label>
+            <default>true</default>
+        </entry>
+        <entry name="useLevelColors" type="Bool">
+            <label>Color the fill by the charge level instead of the Plasma theme color</label>
+            <default>true</default>
+        </entry>
+        <entry name="colorHigh" type="Color">
+            <label>Fill color above the medium threshold</label>
+            <default>#1e9e4a</default>
+        </entry>
+        <entry name="colorMedium" type="Color">
+            <label>Fill color between the low and medium thresholds</label>
+            <default>#c9a227</default>
+        </entry>
+        <entry name="colorLow" type="Color">
+            <label>Fill color at or below the low threshold</label>
+            <default>#c0392b</default>
+        </entry>
+        <entry name="thresholdLow" type="Int">
+            <label>Low charge threshold in percent</label>
+            <default>20</default>
+        </entry>
+        <entry name="thresholdMedium" type="Int">
+            <label>Medium charge threshold in percent</label>
+            <default>50</default>
+        </entry>
+        <entry name="showChargingBolt" type="Bool">
+            <label>Show a lightning bolt instead of the number while charging</label>
+            <default>true</default>
+        </entry>
+        <entry name="fontSizePt" type="Int">
+            <label>Font size of the percentage in points; 0 means automatic</label>
+            <default>0</default>
+        </entry>
+    </group>
+</kcfg>

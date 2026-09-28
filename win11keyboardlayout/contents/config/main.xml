@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kcfg xmlns="http://www.kde.org/standards/kcfg/1.0"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.kde.org/standards/kcfg/1.0
+      http://www.kde.org/standards/kcfg/1.0/kcfg.xsd" >
+    <kcfgfile name=""/>
+
+    <group name="General">
+        <entry name="fontFamily" type="String">
+            <label>Font family of the layout code; empty means the font from the Plasma theme</label>
+            <default></default>
+        </entry>
+        <entry name="fontSizePt" type="Int">
+            <label>Font size of the layout code in points; 0 means the size from the Plasma theme</label>
+            <default>0</default>
+        </entry>
+        <entry name="bold" type="Bool">
+            <label>Use a bold font</label>
+            <default>true</default>
+        </entry>
+        <entry name="italic" type="Bool">
+            <label>Use an italic font</label>
+            <default>false</default>
+        </entry>
+        <entry name="uppercase" type="Bool">
+            <label>Show the layout code in upper case</label>
+            <default>true</default>
+        </entry>
+        <entry name="useCustomColor" type="Bool">
+            <label>Use a custom text color instead of the Plasma theme color</label>
+            <default>false</default>
+        </entry>
+        <entry name="textColor" type="Color">
+            <label>Custom text color</label>
+            <default>#ffffff</default>
+        </entry>
+    </group>
+</kcfg>
