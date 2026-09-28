@@ -12,6 +12,7 @@ import QtQuick.Layouts
 import org.kde.kirigami as Kirigami
 import org.kde.plasma.components as PlasmaComponents3
 import org.kde.coreaddons as KCoreAddons
+import org.kde.kquickcontrolsaddons as KQuickAddons
 import org.kde.notificationmanager as NotificationManager
 
 // Строка уведомления в поповере: иконка приложения, заголовок, текст,
@@ -49,8 +50,9 @@ PlasmaComponents3.ItemDelegate {
 
     readonly property bool isJob: root.type === NotificationManager.Notifications.JobType
     readonly property var modelIndex: root.notificationsModel.index(root.index, 0)
-    readonly property bool hasImage: root.image !== undefined && root.image !== null
-        && String(root.image) !== "" && String(root.image) !== "undefined"
+    // image из org.kde.notificationmanager — это QImage, а не URL: обычный
+    // Image его не отображает, поэтому используется QImageItem.
+    readonly property bool hasImage: typeof root.image === "object" && root.image !== null
     readonly property bool hasActions: root.actionLabels.length > 0 || root.hasDefaultAction
         || root.configurable || root.hasReplyAction || root.isJob
     // jobError — код ошибки: 0 значит «ошибки нет», его показывать не нужно.
@@ -153,13 +155,16 @@ PlasmaComponents3.ItemDelegate {
         }
 
         // Превью-картинка (скриншоты, обложки и т.п.)
-        Image {
+        Loader {
             Layout.fillWidth: true
             Layout.preferredHeight: root.hasImage ? Kirigami.Units.gridUnit * 8 : 0
             visible: root.hasImage
-            source: root.hasImage ? String(root.image) : ""
-            fillMode: Image.PreserveAspectFit
-            asynchronous: true
+            active: root.hasImage
+            sourceComponent: KQuickAddons.QImageItem {
+                image: root.image
+                fillMode: KQuickAddons.QImageItem.PreserveAspectFit
+                smooth: true
+            }
         }
 
         // Задание: прогресс, процент и ошибка

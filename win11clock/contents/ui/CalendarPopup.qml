@@ -108,6 +108,13 @@ PlasmaExtras.Representation {
                 spacing: 0
                 model: root.notificationsModel
 
+                // Индикатор прокрутки: уведомлений может быть больше, чем
+                // помещается в поповере.
+                PlasmaComponents3.ScrollBar.vertical: PlasmaComponents3.ScrollBar {
+                    id: notificationScrollBar
+                    policy: PlasmaComponents3.ScrollBar.AsNeeded
+                }
+
                 delegate: NotificationItem {
                     notificationsModel: root.notificationsModel
 

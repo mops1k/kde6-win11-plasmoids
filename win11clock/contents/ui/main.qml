@@ -12,6 +12,7 @@ import org.kde.plasma.plasmoid
 import org.kde.plasma.clock
 import org.kde.kirigami as Kirigami
 import org.kde.notificationmanager as NotificationManager
+import org.mops1k.win11clock.notifications as Notifications
 
 PlasmoidItem {
     id: root
@@ -152,4 +153,12 @@ PlasmoidItem {
         onClearAllRequested: root.clearAllNotifications()
         onDoNotDisturbRequested: enabled => root.setDoNotDisturb(enabled)
     }
+
+    // Всплывающие уведомления (toast) показывает вендоренный модуль
+    // org.mops1k.win11clock.notifications: его синглтон Globals сам создаёт
+    // Instantiator попапов и позиционирует их по настройке KCM popupPosition.
+    // Апплет отдаёт ему себя, чтобы Globals знал visualParent (компакт-
+    // представление в панели) и containment для расчёта геометрии экрана.
+    Component.onCompleted: Notifications.Globals.adopt(root)
+    Component.onDestruction: Notifications.Globals.forget()
 }
