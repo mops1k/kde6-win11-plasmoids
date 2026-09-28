@@ -136,6 +136,7 @@ PlasmoidItem {
         timeText: root.formatTime(clock.dateTime)
         dateText: root.formatDate(clock.dateTime)
         showDate: Plasmoid.configuration.showDate
+        dndEnabled: root.dndEnabled
 
         property bool wasExpanded: false
         onPressed: wasExpanded = root.expanded

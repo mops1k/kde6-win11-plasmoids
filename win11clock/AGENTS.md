@@ -126,7 +126,9 @@ upstream:
   форматирование времени/даты, «Не беспокоить», «Очистить все»; вызывает
   `Notifications.Globals.adopt(root)`/`forget()`.
 - `contents/ui/CompactRepresentation.qml` — время над датой в панели,
-  выравнивание блока и строк по настройке «Положение».
+  выравнивание блока и строк по настройке «Положение», значок «Не беспокоить»
+  (колокольчик + z) справа при `dndEnabled`; отступы содержимого заданы
+  явно (`leftPadding`/`rightPadding`, правый больше — 3×smallSpacing).
 - `contents/ui/CalendarPopup.qml` — поповер: уведомления, `MonthView`,
   переключатель «Не беспокоить» в шапке, «Очистить все» под шапкой.
 - `contents/ui/NotificationItem.qml` — делегат уведомления.

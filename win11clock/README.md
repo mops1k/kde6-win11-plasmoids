@@ -87,7 +87,8 @@ kpackagetool6 --type Plasma/Applet --install dist/org.mops1k.win11clock-0.1.0.pl
   (режим истории), форматирование времени и даты, «Не беспокоить»,
   «Очистить все»; отдаёт себя синглтону `Globals` (`adopt`/`forget`).
 - `contents/ui/CompactRepresentation.qml` — время над датой в панели,
-  выравнивание по настройке «Положение».
+  выравнивание по настройке «Положение»; при включённом «Не беспокоить»
+  справа от часов появляется значок-колокольчик с буквой z (как в Windows 11).
 - `contents/ui/CalendarPopup.qml` — поповер: уведомления, `MonthView`,
   переключатель «Не беспокоить» в шапке.
 - `contents/ui/NotificationItem.qml` — делегат уведомления: styled text,

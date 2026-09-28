@@ -27,6 +27,7 @@ MouseArea {
     required property string timeText
     required property string dateText
     required property bool showDate
+    required property bool dndEnabled
 
     hoverEnabled: true
     activeFocusOnTab: true
@@ -46,7 +47,12 @@ MouseArea {
         ? Qt.AlignRight
         : (root.alignment === 2 ? Qt.AlignLeft : Qt.AlignHCenter)
 
-    readonly property real contentWidth: layout.implicitWidth + Kirigami.Units.smallSpacing * 2
+    // Отступы содержимого внутри апплета: справа больше, чтобы блок часов
+    // и значок «Не беспокоить» не прилипали к краю панели.
+    readonly property int leftPadding: Kirigami.Units.smallSpacing * 2
+    readonly property int rightPadding: Kirigami.Units.smallSpacing * 3
+
+    readonly property real contentWidth: layout.implicitWidth + root.leftPadding + root.rightPadding
     readonly property real contentHeight: layout.implicitHeight
 
     implicitWidth: contentWidth
@@ -94,43 +100,79 @@ MouseArea {
         x: {
             switch (root.alignment) {
             case 0:
-                // вплотную к правому краю апплета
-                return Math.max(0, root.width - width);
+                // вплотную к правому краю апплета с учётом отступа
+                return Math.max(0, root.width - width - root.rightPadding);
             case 2:
-                return 0;
+                return root.leftPadding;
             default:
                 return Math.round((root.width - width) / 2);
             }
         }
 
-        ColumnLayout {
+        RowLayout {
             id: layout
 
             anchors.fill: parent
-            spacing: 0
+            spacing: Kirigami.Units.smallSpacing
 
-            PlasmaComponents3.Label {
-                // Строки выравниваются друг относительно друга так же,
-                // как весь блок в апплете: иначе время «висит» по центру
-                // над более широкой датой.
-                Layout.alignment: root.labelAlignment
+            ColumnLayout {
+                id: clockLayout
 
-                text: root.timeText
-                color: root.textColor
-                font.family: root.textFontFamily
-                font.pixelSize: Plasmoid.configuration.timeFontSizePt > 0 ? Plasmoid.configuration.timeFontSizePt : root.autoTimeSize
-                font.bold: Plasmoid.configuration.boldTime
+                Layout.alignment: Qt.AlignVCenter
+                spacing: 0
+
+                PlasmaComponents3.Label {
+                    // Строки выравниваются друг относительно друга так же,
+                    // как весь блок в апплете: иначе время «висит» по центру
+                    // над более широкой датой.
+                    Layout.alignment: root.labelAlignment
+
+                    text: root.timeText
+                    color: root.textColor
+                    font.family: root.textFontFamily
+                    font.pixelSize: Plasmoid.configuration.timeFontSizePt > 0 ? Plasmoid.configuration.timeFontSizePt : root.autoTimeSize
+                    font.bold: Plasmoid.configuration.boldTime
+                }
+
+                PlasmaComponents3.Label {
+                    Layout.alignment: root.labelAlignment
+
+                    visible: root.showDate
+                    text: root.dateText
+                    color: root.textColor
+                    opacity: 0.75
+                    font.family: root.textFontFamily
+                    font.pixelSize: Plasmoid.configuration.dateFontSizePt > 0 ? Plasmoid.configuration.dateFontSizePt : root.autoDateSize
+                }
             }
 
-            PlasmaComponents3.Label {
-                Layout.alignment: root.labelAlignment
+            // Значок «Не беспокоить» справа от часов — колокольчик с буквой z,
+            // как в Windows 11. Появляется только при включённом режиме.
+            Item {
+                id: dndIndicator
 
-                visible: root.showDate
-                text: root.dateText
-                color: root.textColor
-                opacity: 0.75
-                font.family: root.textFontFamily
-                font.pixelSize: Plasmoid.configuration.dateFontSizePt > 0 ? Plasmoid.configuration.dateFontSizePt : root.autoDateSize
+                Layout.alignment: Qt.AlignVCenter
+                Layout.preferredWidth: Math.round(root.autoDateSize * 1.5)
+                Layout.preferredHeight: Math.round(root.autoDateSize * 1.5)
+                visible: root.dndEnabled
+
+                Kirigami.Icon {
+                    anchors.fill: parent
+                    source: "notifications-symbolic"
+                    color: root.textColor
+                    isMask: true
+                }
+
+                PlasmaComponents3.Label {
+                    anchors.right: parent.right
+                    anchors.bottom: parent.bottom
+                    anchors.rightMargin: -Math.round(root.autoDateSize * 0.15)
+                    anchors.bottomMargin: -Math.round(root.autoDateSize * 0.1)
+                    text: "z"
+                    color: root.textColor
+                    font.pixelSize: Math.round(root.autoDateSize * 0.85)
+                    font.bold: true
+                }
             }
         }
     }
