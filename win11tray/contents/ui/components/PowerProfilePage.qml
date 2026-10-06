@@ -7,7 +7,7 @@ import "../lib" as Lib
 Lib.Page {
     id: page
 
-    title: qsTr("Power Mode")
+    title: i18n("Power Mode")
     contentFillsHeight: false
 
     PowerProfilesControl {
@@ -15,7 +15,7 @@ Lib.Page {
     }
 
     footer: Lib.MoreSettingsLink {
-        text: qsTr("More power settings")
+        text: i18n("More power settings")
         onClicked: KCMLauncher.openSystemSettings("kcm_powerdevilprofilesconfig")
     }
 
@@ -24,7 +24,7 @@ Lib.Page {
         spacing: 0
 
         Lib.SectionHeader {
-            text: qsTr("Power Profiles")
+            text: i18n("Power Profiles")
         }
 
         Repeater {
@@ -35,11 +35,11 @@ Lib.Page {
                 text: {
                     switch (modelData) {
                     case "performance":
-                        return qsTr("Performance");
+                        return i18n("Performance");
                     case "balanced":
-                        return qsTr("Balanced");
+                        return i18n("Balanced");
                     case "power-saver":
-                        return qsTr("Power Saver");
+                        return i18n("Power Saver");
                     default:
                         return modelData;
                     }

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-27 06:43+0300\n"
+"POT-Creation-Date: 2026-10-07 02:37+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -20,6 +20,36 @@ msgstr ""
 #: contents/ui/BackgroundAppItem.qml:76
 msgctxt "@action:inmenu"
 msgid "Quit %1"
+msgstr ""
+
+#: contents/ui/components/volume/InputDeviceSection.qml:19
+msgid "Input Device"
+msgstr ""
+
+#: contents/ui/components/volume/InputDeviceSection.qml:26
+msgid "No input device"
+msgstr ""
+
+#: contents/ui/components/volume/InputDeviceSection.qml:77
+#: contents/ui/components/volume/OutputDeviceSection.qml:69
+#: contents/ui/components/SystemStatusRow.qml:260
+msgid "Unknown device"
+msgstr ""
+
+#: contents/ui/components/volume/OutputDeviceSection.qml:18
+msgid "Output Device"
+msgstr ""
+
+#: contents/ui/components/volume/OutputDeviceSection.qml:28
+msgid "No output device"
+msgstr ""
+
+#: contents/ui/components/volume/VolumeMixerSection.qml:17
+msgid "Volume Mixer"
+msgstr ""
+
+#: contents/ui/components/volume/VolumeMixerSection.qml:52
+msgid "Unknown application"
 msgstr ""
 
 #: contents/ui/components/BatteryTile.qml:26
@@ -39,6 +69,638 @@ msgstr ""
 msgctxt ""
 "@info:tooltip Quick settings tile, %1 is the battery charge in percent"
 msgid "Power — %1%"
+msgstr ""
+
+#: contents/ui/components/DisplayTile.qml:24
+msgctxt "@item:label Display mode: same image on all screens"
+msgid "Duplicate"
+msgstr ""
+
+#: contents/ui/components/DisplayTile.qml:26
+msgctxt "@item:label Display mode: screens form one desktop"
+msgid "Extend"
+msgstr ""
+
+#: contents/ui/components/DisplayTile.qml:28
+msgctxt "@item:label Display mode: only the external screen"
+msgid "Second screen only"
+msgstr ""
+
+#: contents/ui/components/DisplayTile.qml:30
+msgctxt "@item:label Display mode: only the built-in screen"
+msgid "PC screen only"
+msgstr ""
+
+#: contents/ui/components/DisplayTile.qml:34
+msgctxt "@item:label Quick settings tile opening the display mode page"
+msgid "Display"
+msgstr ""
+
+#: contents/ui/components/DisplayTile.qml:37
+msgctxt "@info:tooltip Quick settings tile, %1 is the current display mode"
+msgid "Display — %1"
+msgstr ""
+
+#: contents/ui/components/DisplayPage.qml:23
+msgctxt "@title Display mode page"
+msgid "Display"
+msgstr ""
+
+#: contents/ui/components/DisplayPage.qml:33
+msgctxt "@item:label Display mode"
+msgid "PC screen only"
+msgstr ""
+
+#: contents/ui/components/DisplayPage.qml:34
+msgctxt "@info Display mode description"
+msgid "Use only the built-in screen"
+msgstr ""
+
+#: contents/ui/components/DisplayPage.qml:39
+msgctxt "@item:label Display mode"
+msgid "Duplicate"
+msgstr ""
+
+#: contents/ui/components/DisplayPage.qml:40
+msgctxt "@info Display mode description"
+msgid "Show the same image on all screens"
+msgstr ""
+
+#: contents/ui/components/DisplayPage.qml:45
+msgctxt "@item:label Display mode"
+msgid "Extend"
+msgstr ""
+
+#: contents/ui/components/DisplayPage.qml:46
+msgctxt "@info Display mode description"
+msgid "Use the screens as one desktop"
+msgstr ""
+
+#: contents/ui/components/DisplayPage.qml:51
+msgctxt "@item:label Display mode"
+msgid "Second screen only"
+msgstr ""
+
+#: contents/ui/components/DisplayPage.qml:52
+msgctxt "@info Display mode description"
+msgid "Use only the external screen"
+msgstr ""
+
+#: contents/ui/components/DisplayPage.qml:219
+msgctxt "@info Display mode page"
+msgid "Could not read the display configuration."
+msgstr ""
+
+#: contents/ui/components/DisplayPage.qml:227
+msgctxt "@action:button Open the KDE display settings module"
+msgid "Display settings"
+msgstr ""
+
+#: contents/ui/components/AirplaneToggle.qml:12
+msgid "Airplane"
+msgstr ""
+
+#: contents/ui/components/AirplaneToggle.qml:22
+msgid "Airplane Mode — On"
+msgstr ""
+
+#: contents/ui/components/AirplaneToggle.qml:22
+msgid "Airplane Mode — Off"
+msgstr ""
+
+#: contents/ui/components/BatteryPage.qml:14
+msgid "Battery"
+msgstr ""
+
+#: contents/ui/components/BatteryPage.qml:109
+msgid "Fully charged"
+msgstr ""
+
+#: contents/ui/components/BatteryPage.qml:109
+msgid "Charging"
+msgstr ""
+
+#: contents/ui/components/BatteryPage.qml:109
+msgid "Discharging"
+msgstr ""
+
+#: contents/ui/components/BatteryPage.qml:157
+msgid "Battery health"
+msgstr ""
+
+#: contents/ui/components/BatteryPage.qml:195
+#: contents/ui/components/PowerProfilePage.qml:27
+msgid "Power Profiles"
+msgstr ""
+
+#: contents/ui/components/BatteryPage.qml:206
+#: contents/ui/components/PowerProfilePage.qml:38
+msgid "Performance"
+msgstr ""
+
+#: contents/ui/components/BatteryPage.qml:208
+#: contents/ui/components/PowerProfilePage.qml:40
+msgid "Balanced"
+msgstr ""
+
+#: contents/ui/components/BatteryPage.qml:210
+#: contents/ui/components/PowerProfilePage.qml:42
+msgid "Power Saver"
+msgstr ""
+
+#: contents/ui/components/BatteryPage.qml:251
+msgid "Block sleep & screen lock"
+msgstr ""
+
+#: contents/ui/components/BatteryPage.qml:268
+#: contents/ui/components/Footer.qml:95 contents/ui/components/Footer.qml:125
+msgid "Power settings"
+msgstr ""
+
+#: contents/ui/components/BatterySaverToggle.qml:16
+#: contents/ui/components/SystemStatusRow.qml:297
+msgid "Battery Saver"
+msgstr ""
+
+#: contents/ui/components/BatterySaverToggle.qml:31
+msgid "Power Mode — Performance"
+msgstr ""
+
+#: contents/ui/components/BatterySaverToggle.qml:33
+msgid "Power Mode — Power Saver"
+msgstr ""
+
+#: contents/ui/components/BatterySaverToggle.qml:35
+msgid "Power Mode — Balanced"
+msgstr ""
+
+#: contents/ui/components/BluetoothPage.qml:13
+#: contents/ui/components/BluetoothToggle.qml:13
+msgid "Bluetooth"
+msgstr ""
+
+#: contents/ui/components/BluetoothPage.qml:15
+msgid "No devices paired"
+msgstr ""
+
+#: contents/ui/components/BluetoothPage.qml:15
+msgid "Bluetooth is off"
+msgstr ""
+
+#: contents/ui/components/BluetoothPage.qml:18
+msgid "More Bluetooth settings"
+msgstr ""
+
+#: contents/ui/components/BluetoothPage.qml:38
+msgid "Add new device"
+msgstr ""
+
+#: contents/ui/components/BluetoothPage.qml:109
+msgid "Connected"
+msgstr ""
+
+#: contents/ui/components/BluetoothPage.qml:109
+msgid "Disconnected"
+msgstr ""
+
+#: contents/ui/components/BluetoothToggle.qml:30
+msgid "Bluetooth — Off"
+msgstr ""
+
+#: contents/ui/components/BluetoothToggle.qml:32
+msgid "Bluetooth — %1 connected"
+msgstr ""
+
+#: contents/ui/components/BluetoothToggle.qml:33
+msgid "Bluetooth — On, not connected"
+msgstr ""
+
+#: contents/ui/components/BluetoothToggle.qml:44
+msgid "Add new device…"
+msgstr ""
+
+#: contents/ui/components/BluetoothToggle.qml:49
+msgid "Send file…"
+msgstr ""
+
+#: contents/ui/components/BluetoothToggle.qml:54
+msgid "Bluetooth settings"
+msgstr ""
+
+#: contents/ui/components/CastInvertToggle.qml:8
+msgid "Invert Colors"
+msgstr ""
+
+#: contents/ui/components/CastInvertToggle.qml:22
+msgid "Invert Colors — Toggle"
+msgstr ""
+
+#: contents/ui/components/ClipboardPage.qml:18
+msgid "Clipboard"
+msgstr ""
+
+#: contents/ui/components/ClipboardPage.qml:22
+msgid "More clipboard settings"
+msgstr ""
+
+#: contents/ui/components/ClipboardPage.qml:88
+msgid "(empty)"
+msgstr ""
+
+#: contents/ui/components/ClipboardPage.qml:109
+msgid "Clipboard is empty"
+msgstr ""
+
+#: contents/ui/components/ColorSchemeToggle.qml:13
+msgid "Dark Mode"
+msgstr ""
+
+#: contents/ui/components/ColorSchemeToggle.qml:13
+msgid "Light Mode"
+msgstr ""
+
+#: contents/ui/components/ColorSchemeToggle.qml:29
+msgid "Switch to light mode"
+msgstr ""
+
+#: contents/ui/components/ColorSchemeToggle.qml:29
+msgid "Switch to dark mode"
+msgstr ""
+
+#: contents/ui/components/DeviceNotifierPage.qml:19
+msgid "Devices"
+msgstr ""
+
+#: contents/ui/components/DeviceNotifierPage.qml:23
+msgid "More device settings"
+msgstr ""
+
+#: contents/ui/components/DeviceNotifierPage.qml:62
+msgid "Removable device"
+msgstr ""
+
+#: contents/ui/components/DeviceNotifierPage.qml:147
+msgid "Mounted"
+msgstr ""
+
+#: contents/ui/components/DeviceNotifierPage.qml:147
+msgid "Not mounted"
+msgstr ""
+
+#: contents/ui/components/DeviceNotifierPage.qml:190
+msgid "No devices connected"
+msgstr ""
+
+#: contents/ui/components/DndToggle.qml:13
+msgid "Do Not Disturb"
+msgstr ""
+
+#: contents/ui/components/DndToggle.qml:30
+msgid "Do Not Disturb — On"
+msgstr ""
+
+#: contents/ui/components/DndToggle.qml:30
+msgid "Do Not Disturb — Off"
+msgstr ""
+
+#: contents/ui/components/Footer.qml:37
+msgid "Charging — %1"
+msgstr ""
+
+#: contents/ui/components/Footer.qml:42
+msgid "%1 — %2h %3m remaining"
+msgstr ""
+
+#: contents/ui/components/Footer.qml:71
+msgid "Power off / Log out"
+msgstr ""
+
+#: contents/ui/components/Footer.qml:85
+msgid "Open System Settings"
+msgstr ""
+
+#: contents/ui/components/Footer.qml:100
+msgid "Show battery info"
+msgstr ""
+
+#: contents/ui/components/Footer.qml:110
+#: contents/ui/components/BrightnessPage.qml:134
+msgid "Display settings"
+msgstr ""
+
+#: contents/ui/components/Footer.qml:115
+msgid "Sound settings"
+msgstr ""
+
+#: contents/ui/components/Footer.qml:120
+msgid "Network settings"
+msgstr ""
+
+#: contents/ui/components/Footer.qml:130
+msgid "Notification settings"
+msgstr ""
+
+#: contents/ui/components/Footer.qml:140
+msgid "Lock"
+msgstr ""
+
+#: contents/ui/components/Footer.qml:145
+msgid "Log out"
+msgstr ""
+
+#: contents/ui/components/Footer.qml:150
+msgid "Suspend"
+msgstr ""
+
+#: contents/ui/components/Footer.qml:155
+msgid "Hibernate"
+msgstr ""
+
+#: contents/ui/components/Footer.qml:160
+msgid "Restart"
+msgstr ""
+
+#: contents/ui/components/Footer.qml:165
+msgid "Shut down"
+msgstr ""
+
+#: contents/ui/components/HotspotToggle.qml:15
+msgid "Hotspot"
+msgstr ""
+
+#: contents/ui/components/HotspotToggle.qml:30
+msgid "Hotspot — On"
+msgstr ""
+
+#: contents/ui/components/HotspotToggle.qml:30
+msgid "Hotspot — Off"
+msgstr ""
+
+#: contents/ui/components/InhibitSleepToggle.qml:8
+msgid "Sleep Blocked"
+msgstr ""
+
+#: contents/ui/components/InhibitSleepToggle.qml:8
+msgid "No Sleep"
+msgstr ""
+
+#: contents/ui/components/InhibitSleepToggle.qml:58
+msgid "Sleep Inhibited"
+msgstr ""
+
+#: contents/ui/components/InhibitSleepToggle.qml:58
+msgid "Sleep Allowed"
+msgstr ""
+
+#: contents/ui/components/MediaControllerPage.qml:18
+msgid "Media"
+msgstr ""
+
+#: contents/ui/components/MediaControllerPage.qml:22
+msgid "More media settings"
+msgstr ""
+
+#: contents/ui/components/MediaControllerPage.qml:107
+msgid "Unknown track"
+msgstr ""
+
+#: contents/ui/components/MediaControllerPage.qml:116
+msgid "Unknown artist"
+msgstr ""
+
+#: contents/ui/components/MediaControllerPage.qml:233
+msgid "No media playing"
+msgstr ""
+
+#: contents/ui/components/MicMuteToggle.qml:19
+msgid "Mic Muted"
+msgstr ""
+
+#: contents/ui/components/MicMuteToggle.qml:19
+msgid "Mic On"
+msgstr ""
+
+#: contents/ui/components/MicMuteToggle.qml:29
+msgid "Microphone — Muted"
+msgstr ""
+
+#: contents/ui/components/MicMuteToggle.qml:29
+msgid "Microphone — Active"
+msgstr ""
+
+#: contents/ui/components/NetworkPage.qml:13
+#: contents/ui/components/NetworkToggle.qml:28
+msgid "Wi-Fi"
+msgstr ""
+
+#: contents/ui/components/NetworkPage.qml:15
+msgid "No available networks"
+msgstr ""
+
+#: contents/ui/components/NetworkPage.qml:15
+msgid "Wi-Fi is off"
+msgstr ""
+
+#: contents/ui/components/NetworkPage.qml:18
+msgid "More Wi-Fi settings"
+msgstr ""
+
+#: contents/ui/components/NetworkPage.qml:77
+msgid "Connected, open"
+msgstr ""
+
+#: contents/ui/components/NetworkPage.qml:77
+msgid "Connected, secured"
+msgstr ""
+
+#: contents/ui/components/NetworkPage.qml:80
+#: contents/ui/components/NetworkPage.qml:397
+msgid "Verifying and connecting"
+msgstr ""
+
+#: contents/ui/components/NetworkPage.qml:83
+#: contents/ui/components/NetworkPage.qml:275
+msgid "Enter the network security key"
+msgstr ""
+
+#: contents/ui/components/NetworkPage.qml:252
+msgid "Connect"
+msgstr ""
+
+#: contents/ui/components/NetworkPage.qml:288
+msgid "Password"
+msgstr ""
+
+#: contents/ui/components/NetworkPage.qml:343
+msgid "Cancel"
+msgstr ""
+
+#: contents/ui/components/NetworkPage.qml:373
+msgid "Next"
+msgstr ""
+
+#: contents/ui/components/NetworkPage.qml:432
+msgid "Disconnect"
+msgstr ""
+
+#: contents/ui/components/NetworkToggle.qml:47
+msgid "Wi-Fi — On"
+msgstr ""
+
+#: contents/ui/components/NetworkToggle.qml:47
+msgid "Wi-Fi — Off"
+msgstr ""
+
+#: contents/ui/components/NetworkToggle.qml:57
+msgid "Open Wi-Fi settings"
+msgstr ""
+
+#: contents/ui/components/NetworkToggle.qml:62
+msgid "Create hotspot…"
+msgstr ""
+
+#: contents/ui/components/NetworkToggle.qml:67
+msgid "Connect to hidden network…"
+msgstr ""
+
+#: contents/ui/components/NetworkToggle.qml:72
+msgid "Known networks…"
+msgstr ""
+
+#: contents/ui/components/NightLightToggle.qml:9
+msgid "Night Light"
+msgstr ""
+
+#: contents/ui/components/NightLightToggle.qml:23
+msgid "Night Light — Unavailable"
+msgstr ""
+
+#: contents/ui/components/NightLightToggle.qml:25
+msgid "Night Light — On"
+msgstr ""
+
+#: contents/ui/components/NightLightToggle.qml:26
+msgid "Night Light — Off"
+msgstr ""
+
+#: contents/ui/components/PowerProfilePage.qml:10
+msgid "Power Mode"
+msgstr ""
+
+#: contents/ui/components/PowerProfilePage.qml:18
+msgid "More power settings"
+msgstr ""
+
+#: contents/ui/components/TouchpadToggle.qml:10
+msgid "Touchpad On"
+msgstr ""
+
+#: contents/ui/components/TouchpadToggle.qml:10
+msgid "Touchpad Off"
+msgstr ""
+
+#: contents/ui/components/TouchpadToggle.qml:34
+msgid "Touchpad — Enabled"
+msgstr ""
+
+#: contents/ui/components/TouchpadToggle.qml:34
+msgid "Touchpad — Disabled"
+msgstr ""
+
+#: contents/ui/components/VolumePage.qml:12
+msgid "Volume"
+msgstr ""
+
+#: contents/ui/components/VolumePage.qml:16
+msgid "More volume settings"
+msgstr ""
+
+#: contents/ui/components/VolumePage.qml:64
+msgid "No applications playing audio"
+msgstr ""
+
+#: contents/ui/components/VolumeSlider.qml:56
+msgid "Unmute"
+msgstr ""
+
+#: contents/ui/components/VolumeSlider.qml:56
+msgid "Mute"
+msgstr ""
+
+#: contents/ui/components/VolumeSlider.qml:64
+msgid "Test sound"
+msgstr ""
+
+#: contents/ui/components/VolumeSlider.qml:69
+msgid "Audio settings"
+msgstr ""
+
+#: contents/ui/components/SystemStatusRow.qml:190
+msgid "Network and Internet settings…"
+msgstr ""
+
+#: contents/ui/components/SystemStatusRow.qml:243
+msgid "Volume mixer"
+msgstr ""
+
+#: contents/ui/components/SystemStatusRow.qml:249
+msgid "Sound settings…"
+msgstr ""
+
+#: contents/ui/components/SystemStatusRow.qml:279
+msgid "Screen settings…"
+msgstr ""
+
+#: contents/ui/components/SystemStatusRow.qml:285
+msgid "Night Light…"
+msgstr ""
+
+#: contents/ui/components/SystemStatusRow.qml:316
+msgid "Power settings…"
+msgstr ""
+
+#: contents/ui/components/BrightnessPage.qml:13
+msgid "Brightness"
+msgstr ""
+
+#: contents/ui/components/BrightnessPage.qml:80
+msgid "Display %1"
+msgstr ""
+
+#: contents/ui/components/BrightnessPage.qml:130
+msgid "Night color settings"
+msgstr ""
+
+#: contents/ui/components/NotificationsPage.qml:18
+msgid "Notifications"
+msgstr ""
+
+#: contents/ui/components/NotificationsPage.qml:22
+msgid "More notification settings"
+msgstr ""
+
+#: contents/ui/components/NotificationsPage.qml:80
+msgid "Notification"
+msgstr ""
+
+#: contents/ui/components/NotificationsPage.qml:104
+msgid "Just now"
+msgstr ""
+
+#: contents/ui/components/NotificationsPage.qml:105
+msgid "%1 m ago"
+msgstr ""
+
+#: contents/ui/components/NotificationsPage.qml:106
+msgid "%1 h ago"
+msgstr ""
+
+#: contents/ui/components/NotificationsPage.qml:107
+msgid "%1 d ago"
+msgstr ""
+
+#: contents/ui/components/NotificationsPage.qml:123
+msgid "No notifications"
 msgstr ""
 
 #: contents/ui/config.qml:13

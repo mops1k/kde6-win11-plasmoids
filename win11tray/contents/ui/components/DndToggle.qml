@@ -10,7 +10,7 @@ Lib.Tile {
         id: notificationSettings
     }
 
-    label: qsTr("Do Not Disturb")
+    label: i18n("Do Not Disturb")
     iconSource: Funcs.checkInhibition(notificationSettings) ? "notifications-disabled" : "notifications"
     active: Funcs.checkInhibition(notificationSettings)
 
@@ -27,5 +27,5 @@ Lib.Tile {
         notificationSettings.save();
     }
 
-    tooltipText: Funcs.checkInhibition(notificationSettings) ? qsTr("Do Not Disturb — On") : qsTr("Do Not Disturb — Off")
+    tooltipText: Funcs.checkInhibition(notificationSettings) ? i18n("Do Not Disturb — On") : i18n("Do Not Disturb — Off")
 }

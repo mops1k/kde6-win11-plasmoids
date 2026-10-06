@@ -5,7 +5,7 @@ import "../lib" as Lib
 Lib.Tile {
     id: tile
 
-    label: blockSleep ? qsTr("Sleep Blocked") : qsTr("No Sleep")
+    label: blockSleep ? i18n("Sleep Blocked") : i18n("No Sleep")
     iconSource: blockSleep ? "system-suspend-inhibited" : "system-suspend-uninhibited"
     active: blockSleep
 
@@ -55,5 +55,5 @@ Lib.Tile {
         }
     }
 
-    tooltipText: blockSleep ? qsTr("Sleep Inhibited") : qsTr("Sleep Allowed")
+    tooltipText: blockSleep ? i18n("Sleep Inhibited") : i18n("Sleep Allowed")
 }

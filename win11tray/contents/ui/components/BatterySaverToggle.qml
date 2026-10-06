@@ -13,7 +13,7 @@ Lib.SplitTile {
     readonly property bool available: powerProfiles.isPowerProfileDaemonInstalled && powerProfiles.profiles.indexOf("power-saver") >= 0
 
     visible: available
-    label: qsTr("Battery Saver")
+    label: i18n("Battery Saver")
     iconSource: "battery-low-symbolic"
     active: saverOn
 
@@ -28,11 +28,11 @@ Lib.SplitTile {
     tooltipText: {
         switch (powerProfiles.activeProfile) {
         case "performance":
-            return qsTr("Power Mode — Performance");
+            return i18n("Power Mode — Performance");
         case "power-saver":
-            return qsTr("Power Mode — Power Saver");
+            return i18n("Power Mode — Power Saver");
         default:
-            return qsTr("Power Mode — Balanced");
+            return i18n("Power Mode — Balanced");
         }
     }
 }

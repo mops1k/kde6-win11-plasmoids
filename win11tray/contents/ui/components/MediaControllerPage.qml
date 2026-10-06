@@ -15,11 +15,11 @@ import "../lib" as Lib
 Lib.Page {
     id: page
 
-    title: qsTr("Media")
+    title: i18n("Media")
     contentFillsHeight: false
 
     footer: Lib.MoreSettingsLink {
-        text: qsTr("More media settings")
+        text: i18n("More media settings")
         onClicked: KCMLauncher.openSystemSettings("kcm_keys")
     }
 
@@ -104,7 +104,7 @@ Lib.Page {
 
                             PlasmaComponents3.Label {
                                 Layout.fillWidth: true
-                                text: page.activePlayer ? (page.activePlayer.title || qsTr("Unknown track")) : ""
+                                text: page.activePlayer ? (page.activePlayer.title || i18n("Unknown track")) : ""
                                 color: Kirigami.Theme.textColor
                                 font.pixelSize: 12
                                 font.bold: true
@@ -113,7 +113,7 @@ Lib.Page {
 
                             PlasmaComponents3.Label {
                                 Layout.fillWidth: true
-                                text: page.activePlayer ? (page.activePlayer.artist || qsTr("Unknown artist")) : ""
+                                text: page.activePlayer ? (page.activePlayer.artist || i18n("Unknown artist")) : ""
                                 color: Kirigami.Theme.textColor
                                 opacity: 0.6
                                 font.pixelSize: 10
@@ -230,7 +230,7 @@ Lib.Page {
         PlasmaComponents3.Label {
             Layout.fillWidth: true
             Layout.topMargin: 10
-            text: qsTr("No media playing")
+            text: i18n("No media playing")
             color: Kirigami.Theme.textColor
             opacity: 0.5
             font.pixelSize: 11

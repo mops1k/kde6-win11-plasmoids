@@ -34,12 +34,12 @@ Rectangle {
         const pct = batteryControl.percent + "%";
         const charging = batteryControl.state === BatteryControlModel.Charging || batteryControl.state === BatteryControlModel.FullyCharged;
         if (charging)
-            return qsTr("Charging — %1").arg(pct);
+            return i18n("Charging — %1").arg(pct);
         const remaining = batteryControl.remainingMsec;
         if (remaining && remaining > 0) {
             const h = Math.floor(remaining / 3600);
             const m = Math.floor((remaining % 3600) / 60);
-            return qsTr("%1 — %2h %3m remaining").arg(pct).arg(h).arg(m);
+            return i18n("%1 — %2h %3m remaining").arg(pct).arg(h).arg(m);
         }
         return pct;
     }
@@ -68,7 +68,7 @@ Rectangle {
             anchors.rightMargin: 12
             anchors.verticalCenter: parent.verticalCenter
             iconSource: "system-shutdown"
-            tooltipText: qsTr("Power off / Log out")
+            tooltipText: i18n("Power off / Log out")
             onClicked: {
                 var session = Qt.createQmlObject('import org.kde.plasma.private.sessions as Sessions; Sessions.SessionManagement {}', powerBtn, "powerDyn");
                 session.requestLogoutPrompt();
@@ -82,7 +82,7 @@ Rectangle {
             anchors.right: parent.right
             anchors.verticalCenter: parent.verticalCenter
             iconSource: "configure"
-            tooltipText: qsTr("Open System Settings")
+            tooltipText: i18n("Open System Settings")
             onClicked: KCMLauncher.openSystemSettings("")
             onRightClicked: gearMenu.popup()
         }
@@ -92,12 +92,12 @@ Rectangle {
         id: batteryMenu
 
         PlasmaComponents3.MenuItem {
-            text: qsTr("Power settings")
+            text: i18n("Power settings")
             icon.name: "configure"
             onClicked: Qt.openUrlExternally("systemsettings://kcm_powerdevilprofilesconfig")
         }
         PlasmaComponents3.MenuItem {
-            text: qsTr("Show battery info")
+            text: i18n("Show battery info")
             icon.name: "battery"
             onClicked: footer.batteryInfoClicked()
         }
@@ -107,27 +107,27 @@ Rectangle {
         id: gearMenu
 
         PlasmaComponents3.MenuItem {
-            text: qsTr("Display settings")
+            text: i18n("Display settings")
             icon.name: "preferences-desktop-display"
             onClicked: Qt.openUrlExternally("systemsettings://kcm_kscreen")
         }
         PlasmaComponents3.MenuItem {
-            text: qsTr("Sound settings")
+            text: i18n("Sound settings")
             icon.name: "audio-volume-high"
             onClicked: Qt.openUrlExternally("systemsettings://kcm_pulseaudio")
         }
         PlasmaComponents3.MenuItem {
-            text: qsTr("Network settings")
+            text: i18n("Network settings")
             icon.name: "network-wireless"
             onClicked: Qt.openUrlExternally("systemsettings://kcm_networkmanagement")
         }
         PlasmaComponents3.MenuItem {
-            text: qsTr("Power settings")
+            text: i18n("Power settings")
             icon.name: "battery"
             onClicked: Qt.openUrlExternally("systemsettings://kcm_powerdevilprofilesconfig")
         }
         PlasmaComponents3.MenuItem {
-            text: qsTr("Notification settings")
+            text: i18n("Notification settings")
             icon.name: "notifications"
             onClicked: Qt.openUrlExternally("systemsettings://kcm_notifications")
         }
@@ -137,32 +137,32 @@ Rectangle {
         id: powerMenu
 
         PlasmaComponents3.MenuItem {
-            text: qsTr("Lock")
+            text: i18n("Lock")
             icon.name: "system-lock-screen"
             onClicked: footer._lockScreen()
         }
         PlasmaComponents3.MenuItem {
-            text: qsTr("Log out")
+            text: i18n("Log out")
             icon.name: "system-log-out"
             onClicked: footer._logOut()
         }
         PlasmaComponents3.MenuItem {
-            text: qsTr("Suspend")
+            text: i18n("Suspend")
             icon.name: "system-suspend"
             onClicked: footer._suspend()
         }
         PlasmaComponents3.MenuItem {
-            text: qsTr("Hibernate")
+            text: i18n("Hibernate")
             icon.name: "system-hibernate"
             onClicked: footer._hibernate()
         }
         PlasmaComponents3.MenuItem {
-            text: qsTr("Restart")
+            text: i18n("Restart")
             icon.name: "system-restart"
             onClicked: footer._restart()
         }
         PlasmaComponents3.MenuItem {
-            text: qsTr("Shut down")
+            text: i18n("Shut down")
             icon.name: "system-shutdown"
             onClicked: footer._shutDown()
         }

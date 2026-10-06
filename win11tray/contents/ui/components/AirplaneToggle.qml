@@ -9,7 +9,7 @@ Lib.Tile {
         id: handler
     }
 
-    label: qsTr("Airplane")
+    label: i18n("Airplane")
     iconSource: "network-flightmode-on-symbolic"
     active: PlasmaNM.Configuration.airplaneModeEnabled
 
@@ -19,5 +19,5 @@ Lib.Tile {
         PlasmaNM.Configuration.airplaneModeEnabled = enable;
     }
 
-    tooltipText: active ? qsTr("Airplane Mode — On") : qsTr("Airplane Mode — Off")
+    tooltipText: active ? i18n("Airplane Mode — On") : i18n("Airplane Mode — Off")
 }

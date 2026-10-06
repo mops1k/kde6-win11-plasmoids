@@ -16,7 +16,7 @@ Lib.Tile {
     readonly property bool muted: preferredSource ? preferredSource.muted : true
     readonly property bool available: preferredSource && sourceFilterModel.count > 0
 
-    label: muted ? qsTr("Mic Muted") : qsTr("Mic On")
+    label: muted ? i18n("Mic Muted") : i18n("Mic On")
     iconSource: muted ? "audio-input-microphone-muted" : "microphone-sensitivity-high"
     active: !muted
     visible: available
@@ -26,5 +26,5 @@ Lib.Tile {
             preferredSource.muted = !preferredSource.muted;
     }
 
-    tooltipText: muted ? qsTr("Microphone — Muted") : qsTr("Microphone — Active")
+    tooltipText: muted ? i18n("Microphone — Muted") : i18n("Microphone — Active")
 }

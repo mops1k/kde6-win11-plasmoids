@@ -16,11 +16,11 @@ import "../lib" as Lib
 Lib.Page {
     id: page
 
-    title: qsTr("Devices")
+    title: i18n("Devices")
     contentFillsHeight: false
 
     footer: Lib.MoreSettingsLink {
-        text: qsTr("More device settings")
+        text: i18n("More device settings")
         onClicked: KCMLauncher.openSystemSettings("kcm_removabledevices")
     }
 
@@ -59,7 +59,7 @@ Lib.Page {
             if (data["Removable"] === true || data["Hotplug"] === true) {
                 connected.push({
                     udi: udi,
-                    description: data["Description"] || data["Product"] || qsTr("Removable device"),
+                    description: data["Description"] || data["Product"] || i18n("Removable device"),
                     icon: data["Icon"] || "drive-removable-media",
                     mounted: data["Mounted"] === true,
                     vendor: data["Vendor"] || "",
@@ -144,7 +144,7 @@ Lib.Page {
                             }
 
                             PlasmaComponents3.Label {
-                                text: modelData.mounted ? qsTr("Mounted") : qsTr("Not mounted")
+                                text: modelData.mounted ? i18n("Mounted") : i18n("Not mounted")
                                 color: Kirigami.Theme.textColor
                                 opacity: 0.4
                                 font.pixelSize: 9
@@ -187,7 +187,7 @@ Lib.Page {
         PlasmaComponents3.Label {
             Layout.fillWidth: true
             Layout.topMargin: 10
-            text: qsTr("No devices connected")
+            text: i18n("No devices connected")
             color: Kirigami.Theme.textColor
             opacity: 0.5
             font.pixelSize: 11

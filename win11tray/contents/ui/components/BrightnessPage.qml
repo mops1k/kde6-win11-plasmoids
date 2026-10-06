@@ -10,7 +10,7 @@ import "../lib" as Lib
 Lib.Page {
     id: page
 
-    title: qsTr("Brightness")
+    title: i18n("Brightness")
     contentFillsHeight: false
 
     ScreenBrightnessControl {
@@ -77,7 +77,7 @@ Lib.Page {
 
                 PlasmaComponents3.Label {
                     Layout.leftMargin: 22
-                    text: modelData.label || qsTr("Display %1").arg(index + 1)
+                    text: modelData.label || i18n("Display %1").arg(index + 1)
                     font.pixelSize: 10
                     opacity: 0.5
                     color: Kirigami.Theme.textColor
@@ -127,11 +127,11 @@ Lib.Page {
 
     footer: ColumnLayout {
         Lib.MoreSettingsLink {
-            text: qsTr("Night color settings")
+            text: i18n("Night color settings")
             onClicked: KCMLauncher.openSystemSettings("kcm_nightlight")
         }
         Lib.MoreSettingsLink {
-            text: qsTr("Display settings")
+            text: i18n("Display settings")
             onClicked: KCMLauncher.openSystemSettings("kcm_kscreen")
         }
     }

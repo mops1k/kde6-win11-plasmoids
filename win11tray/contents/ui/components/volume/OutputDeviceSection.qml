@@ -15,7 +15,7 @@ ColumnLayout {
     spacing: 0
 
     Lib.SectionHeader {
-        text: qsTr("Output Device")
+        text: i18n("Output Device")
     }
 
     Lib.ListRow {
@@ -25,7 +25,7 @@ ColumnLayout {
             models.sinkAvailable ? models.sink.volume : 0,
             models.sinkAvailable ? models.sink.muted : true
         )
-        text: models.sinkAvailable ? models.sink.description : qsTr("No output device")
+        text: models.sinkAvailable ? models.sink.description : i18n("No output device")
         trailing: section.hasMultiple ? arrowComponent : null
         onClicked: if (section.hasMultiple) section.expanded = !section.expanded
     }
@@ -66,7 +66,7 @@ ColumnLayout {
                     Layout.fillWidth: true
                     selected: model.PulseObject && model.PulseObject.default
                     iconSource: Funcs.volIconName(model.Volume, model.Muted)
-                    text: model.Description || model.Name || qsTr("Unknown device")
+                    text: model.Description || model.Name || i18n("Unknown device")
                     onClicked: {
                         models.setDefaultSink(model.PulseObject)
                         models.playFeedback(model.PulseObject.index)

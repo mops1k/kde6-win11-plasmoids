@@ -10,16 +10,16 @@ function btStatus(btManager) {
     }
 
     if (btManager.bluetoothBlocked) {
-        return { active: false, message: qsTr("Disabled"), icon: "network-bluetooth-inactive-symbolic" };
+        return { active: false, icon: "network-bluetooth-inactive-symbolic" };
     } else if (!btManager.bluetoothOperational) {
         if (!btManager.adapters.length) {
-            return { active: false, message: qsTr("Unavailable"), icon: "network-bluetooth-inactive-symbolic" };
+            return { active: false, icon: "network-bluetooth-inactive-symbolic" };
         }
-        return { active: false, message: qsTr("Offline"), icon: "network-bluetooth-inactive-symbolic" };
+        return { active: false, icon: "network-bluetooth-inactive-symbolic" };
     } else if (connectedDevices.length >= 1) {
         return { active: true, message: connectedDevices[0].name, icon: "network-bluetooth-activated-symbolic" };
     }
-    return { active: true, message: qsTr("Not Connected"), icon: "network-bluetooth-symbolic" };
+    return { active: true, icon: "network-bluetooth-symbolic" };
 }
 
 function toggleBluetooth(btManager) {

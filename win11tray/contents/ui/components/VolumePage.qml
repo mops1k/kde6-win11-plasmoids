@@ -9,11 +9,11 @@ import "volume" as Volume
 Lib.Page {
     id: page
 
-    title: qsTr("Volume")
+    title: i18n("Volume")
     contentFillsHeight: false
 
     footer: Lib.MoreSettingsLink {
-        text: qsTr("More volume settings")
+        text: i18n("More volume settings")
         onClicked: KCMLauncher.openSystemSettings("kcm_pulseaudio")
     }
 
@@ -61,7 +61,7 @@ Lib.Page {
     PlasmaComponents3.Label {
         Layout.fillWidth: true
         Layout.topMargin: 10
-        text: qsTr("No applications playing audio")
+        text: i18n("No applications playing audio")
         color: Kirigami.Theme.textColor
         opacity: 0.5
         font.pixelSize: 11

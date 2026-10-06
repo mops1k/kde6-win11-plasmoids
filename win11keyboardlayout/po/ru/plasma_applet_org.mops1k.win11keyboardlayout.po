@@ -1,0 +1,75 @@
+# Russian translations for win package.
+# Copyright (C) 2026 THE win'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the win package.
+# Automatically generated, 2026.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: win 11keyboardlayout\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-09-28 14:55+0300\n"
+"PO-Revision-Date: 2026-09-28 14:55+0300\n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: none\n"
+"Language: ru\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+
+#: contents/config/config.qml:12
+msgid "Appearance"
+msgstr "Внешний вид"
+
+#: contents/ui/config/ConfigAppearance.qml:30
+msgid "Font family:"
+msgstr "Семейство шрифтов:"
+
+#: contents/ui/config/ConfigAppearance.qml:36
+msgid "Default (from Plasma theme)"
+msgstr "По умолчанию (из темы Plasma)"
+
+#: contents/ui/config/ConfigAppearance.qml:42
+msgid "Font size:"
+msgstr "Размер шрифта:"
+
+#: contents/ui/config/ConfigAppearance.qml:47
+msgid "From theme"
+msgstr "Из темы"
+
+#: contents/ui/config/ConfigAppearance.qml:57
+msgid "Bold"
+msgstr "Жирный"
+
+#: contents/ui/config/ConfigAppearance.qml:62
+msgid "Italic"
+msgstr "Курсив"
+
+#: contents/ui/config/ConfigAppearance.qml:67
+msgid "Upper case code (РУС, ENG)"
+msgstr "Код прописными (РУС, ENG)"
+
+#: contents/ui/config/ConfigAppearance.qml:76
+msgid "Custom text color"
+msgstr "Свой цвет текста"
+
+#: contents/ui/config/ConfigAppearance.qml:80
+msgid "Text color:"
+msgstr "Цвет текста:"
+
+#: contents/ui/config/ConfigAppearance.qml:92
+msgid "Choose…"
+msgstr "Выбрать…"
+
+#: contents/ui/config/ConfigAppearance.qml:101
+msgid "Text color"
+msgstr "Цвет текста"
+
+#: contents/ui/main.qml:29
+msgid "Keyboard layout"
+msgstr "Раскладка клавиатуры"
+
+#: contents/ui/main.qml:91
+msgid "Keyboard layouts"
+msgstr "Раскладки клавиатуры"

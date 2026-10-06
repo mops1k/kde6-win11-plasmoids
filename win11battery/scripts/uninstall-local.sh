@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
-# Удаление QML-плазмоида org.mops1k.win11keyboardlayout.
-#   --restore  вернуть системный апплет раскладки из последнего бэкапа appletsrc
+# Удаление QML-плазмоида org.mops1k.win11battery.
+#   --restore  вернуть системный апплет батареи из последнего бэкапа appletsrc
 set -euo pipefail
 
 APP_ID="org.mops1k.win11battery"

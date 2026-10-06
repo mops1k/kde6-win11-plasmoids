@@ -15,11 +15,11 @@ import "../js/funcs.js" as Funcs
 Lib.Page {
     id: page
 
-    title: qsTr("Notifications")
+    title: i18n("Notifications")
     contentFillsHeight: false
 
     footer: Lib.MoreSettingsLink {
-        text: qsTr("More notification settings")
+        text: i18n("More notification settings")
         onClicked: KCMLauncher.openSystemSettings("kcm_notifications")
     }
 
@@ -77,7 +77,7 @@ Lib.Page {
 
                             PlasmaComponents3.Label {
                                 Layout.fillWidth: true
-                                text: model.Summary || model.ApplicationName || qsTr("Notification")
+                                text: model.Summary || model.ApplicationName || i18n("Notification")
                                 color: Kirigami.Theme.textColor
                                 font.pixelSize: 11
                                 font.bold: true
@@ -101,10 +101,10 @@ Lib.Page {
                                     var ts = model.Created
                                     if (!ts) return ""
                                     var diff = (Date.now() - ts.getTime()) / 1000
-                                    if (diff < 60) return qsTr("Just now")
-                                    if (diff < 3600) return qsTr("%1m ago").arg(Math.floor(diff / 60))
-                                    if (diff < 86400) return qsTr("%1h ago").arg(Math.floor(diff / 3600))
-                                    return qsTr("%1d ago").arg(Math.floor(diff / 86400))
+                                    if (diff < 60) return i18n("Just now")
+                                    if (diff < 3600) return i18n("%1 m ago").arg(Math.floor(diff / 60))
+                                    if (diff < 86400) return i18n("%1 h ago").arg(Math.floor(diff / 3600))
+                                    return i18n("%1 d ago").arg(Math.floor(diff / 86400))
                                 }
                                 color: Kirigami.Theme.textColor
                                 opacity: 0.4
@@ -120,7 +120,7 @@ Lib.Page {
         PlasmaComponents3.Label {
             Layout.fillWidth: true
             Layout.topMargin: 10
-            text: qsTr("No notifications")
+            text: i18n("No notifications")
             color: Kirigami.Theme.textColor
             opacity: 0.5
             font.pixelSize: 11

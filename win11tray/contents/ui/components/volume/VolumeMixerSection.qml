@@ -14,7 +14,7 @@ ColumnLayout {
     visible: hasApps
 
     Lib.SectionHeader {
-        text: qsTr("Volume Mixer")
+        text: i18n("Volume Mixer")
     }
 
     Repeater {
@@ -49,7 +49,7 @@ ColumnLayout {
 
                     PlasmaComponents3.Label {
                         Layout.fillWidth: true
-                        text: (model.Client && model.Client.name) || model.Name || qsTr("Unknown application")
+                        text: (model.Client && model.Client.name) || model.Name || i18n("Unknown application")
                         color: Kirigami.Theme.textColor
                         font.pixelSize: 11
                         elide: Text.ElideRight

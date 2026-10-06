@@ -10,7 +10,7 @@ Lib.SplitTile {
 
     property QtObject btManager: BluezQt.Manager
 
-    label: qsTr("Bluetooth")
+    label: i18n("Bluetooth")
     iconSource: Funcs.btStatus(btManager).icon
     active: Funcs.btStatus(btManager).active
 
@@ -27,10 +27,10 @@ Lib.SplitTile {
 
     tooltipText: {
         if (!Funcs.btStatus(btManager).active)
-            return qsTr("Bluetooth — Off");
+            return i18n("Bluetooth — Off");
         if (connectedCount > 0)
-            return qsTr("Bluetooth — %1 connected").arg(connectedCount);
-        return qsTr("Bluetooth — On, not connected");
+            return i18n("Bluetooth — %1 connected").arg(connectedCount);
+        return i18n("Bluetooth — On, not connected");
     }
 
     onRightClicked: btMenu.popup()
@@ -41,17 +41,17 @@ Lib.SplitTile {
         id: btMenu
 
         PlasmaComponents3.MenuItem {
-            text: qsTr("Add new device…")
+            text: i18n("Add new device…")
             icon.name: "list-add"
             onClicked: btExec.exec("bluedevil-wizard")
         }
         PlasmaComponents3.MenuItem {
-            text: qsTr("Send file…")
+            text: i18n("Send file…")
             icon.name: "document-send"
             onClicked: btExec.exec("bluedevil-sendfile")
         }
         PlasmaComponents3.MenuItem {
-            text: qsTr("Bluetooth settings")
+            text: i18n("Bluetooth settings")
             icon.name: "configure"
             onClicked: Qt.openUrlExternally("systemsettings://kcm_bluetooth")
         }

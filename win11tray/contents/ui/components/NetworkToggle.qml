@@ -25,7 +25,7 @@ Lib.SplitTile {
     readonly property bool wifiAvailable: availableDevices.wirelessDeviceAvailable
     readonly property bool wifiOn: wifiAvailable && enabledConnections.wirelessEnabled
 
-    label: qsTr("Wi-Fi")
+    label: i18n("Wi-Fi")
     iconSource: {
         var base = activeConnectionIcon.connectionIcon;
         if (!wifiOn)
@@ -44,7 +44,7 @@ Lib.SplitTile {
         }
     }
 
-    tooltipText: wifiOn ? qsTr("Wi-Fi — On") : qsTr("Wi-Fi — Off")
+    tooltipText: wifiOn ? i18n("Wi-Fi — On") : i18n("Wi-Fi — Off")
 
     onRightClicked: networkMenu.popup()
 
@@ -54,22 +54,22 @@ Lib.SplitTile {
         id: networkMenu
 
         PlasmaComponents3.MenuItem {
-            text: qsTr("Open Wi-Fi settings")
+            text: i18n("Open Wi-Fi settings")
             icon.name: "configure"
             onClicked: Qt.openUrlExternally("systemsettings://kcm_networkmanagement")
         }
         PlasmaComponents3.MenuItem {
-            text: qsTr("Create hotspot…")
+            text: i18n("Create hotspot…")
             icon.name: "network-wireless-hotspot"
             onClicked: handler.createHotspot()
         }
         PlasmaComponents3.MenuItem {
-            text: qsTr("Connect to hidden network…")
+            text: i18n("Connect to hidden network…")
             icon.name: "network-wireless-secure"
             onClicked: handler.addAndActivateConnection("")
         }
         PlasmaComponents3.MenuItem {
-            text: qsTr("Known networks…")
+            text: i18n("Known networks…")
             icon.name: "preferences-system-network"
             onClicked: Qt.openUrlExternally("systemsettings://kcm_networkmanagement")
         }

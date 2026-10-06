@@ -11,7 +11,7 @@ import "../lib" as Lib
 Lib.Page {
     id: page
 
-    title: qsTr("Battery")
+    title: i18n("Battery")
 
     BatteryControlModel {
         id: batteryControl
@@ -106,7 +106,7 @@ Lib.Page {
         spacing: 8
 
         PlasmaComponents3.Label {
-            text: page.isFull ? qsTr("Fully charged") : page.isCharging ? qsTr("Charging") : qsTr("Discharging")
+            text: page.isFull ? i18n("Fully charged") : page.isCharging ? i18n("Charging") : i18n("Discharging")
             font.pixelSize: 10
             opacity: 0.6
             color: Kirigami.Theme.textColor
@@ -154,7 +154,7 @@ Lib.Page {
             visible: page.health !== "--"
 
             PlasmaComponents3.Label {
-                text: qsTr("Battery health")
+                text: i18n("Battery health")
                 font.pixelSize: 9
                 opacity: 0.5
                 color: Kirigami.Theme.textColor
@@ -192,7 +192,7 @@ Lib.Page {
         }
 
         Lib.SectionHeader {
-            text: qsTr("Power Profiles")
+            text: i18n("Power Profiles")
         }
 
         Repeater {
@@ -203,11 +203,11 @@ Lib.Page {
                 text: {
                     switch (modelData) {
                     case "performance":
-                        return qsTr("Performance");
+                        return i18n("Performance");
                     case "balanced":
-                        return qsTr("Balanced");
+                        return i18n("Balanced");
                     case "power-saver":
-                        return qsTr("Power Saver");
+                        return i18n("Power Saver");
                     default:
                         return modelData;
                     }
@@ -248,7 +248,7 @@ Lib.Page {
             }
 
             PlasmaComponents3.Label {
-                text: qsTr("Block sleep & screen lock")
+                text: i18n("Block sleep & screen lock")
                 font.pixelSize: 12
                 color: Kirigami.Theme.textColor
             }
@@ -265,7 +265,7 @@ Lib.Page {
     }
 
     footer: Lib.MoreSettingsLink {
-        text: qsTr("Power settings")
+        text: i18n("Power settings")
         onClicked: Qt.openUrlExternally("systemsettings://kcm_powerdevilprofilesconfig")
     }
 }

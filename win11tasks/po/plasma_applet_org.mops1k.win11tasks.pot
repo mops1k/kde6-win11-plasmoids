@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-24 02:41+0300\n"
+"POT-Creation-Date: 2026-09-28 14:55+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -724,13 +724,6 @@ msgstr ""
 msgctxt "@item:inlistbox Task icons position"
 msgid "Centered"
 msgstr ""
-
-#: win11tasks/backend.cpp:288
-msgctxt "Show all user Places"
-msgid "%1 more Place…"
-msgid_plural "%1 more Places…"
-msgstr[0] ""
-msgstr[1] ""
 
 #: win11tasks/backend.cpp:372
 msgid "Recent Downloads"

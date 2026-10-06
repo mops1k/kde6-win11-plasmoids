@@ -16,14 +16,14 @@ ColumnLayout {
     spacing: 0
 
     Lib.SectionHeader {
-        text: qsTr("Input Device")
+        text: i18n("Input Device")
     }
 
     Lib.ListRow {
         Layout.fillWidth: true
         selected: true
         iconSource: Funcs.volIconName(models.sourceAvailable ? models.source.volume : 0, models.sourceAvailable ? models.source.muted : true)
-        text: models.sourceAvailable ? models.source.description : qsTr("No input device")
+        text: models.sourceAvailable ? models.source.description : i18n("No input device")
         trailing: section.hasMultiple ? arrowComponent : null
         onClicked: if (section.hasMultiple)
             section.expanded = !section.expanded
@@ -74,7 +74,7 @@ ColumnLayout {
                     Layout.fillWidth: true
                     selected: model.PulseObject && model.PulseObject.default
                     iconSource: Funcs.volIconName(model.Volume, model.Muted)
-                    text: model.Description || model.Name || qsTr("Unknown device")
+                    text: model.Description || model.Name || i18n("Unknown device")
                     onClicked: {
                         models.setDefaultSource(model.PulseObject);
                         models.playFeedback(model.PulseObject.index);

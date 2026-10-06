@@ -4,6 +4,7 @@
 set -euo pipefail
 
 APP_ID="org.mops1k.win11keyboardlayout"
+DOMAIN="plasma_applet_${APP_ID}"
 SRC_DIR="$(cd "$(dirname "$0")/.." && pwd)"
 RESTART=1
 
@@ -22,6 +23,16 @@ else
     kpackagetool6 --type Plasma/Applet --install "$SRC_DIR"
     echo "==> Установлен ${APP_ID}"
 fi
+
+# Переводы: .mo собираются вручную (у KPackage нет CMake/ki18n_install).
+for po in "$SRC_DIR"/po/*/*.po; do
+    [ -f "$po" ] || continue
+    lang="$(basename "$(dirname "$po")")"
+    dest="$HOME/.local/share/locale/$lang/LC_MESSAGES"
+    mkdir -p "$dest"
+    msgfmt -o "$dest/$DOMAIN.mo" "$po"
+    echo "==> Перевод: $dest/$DOMAIN.mo"
+done
 
 if [ "$RESTART" = 1 ]; then
     systemctl --user restart plasma-plasmashell.service

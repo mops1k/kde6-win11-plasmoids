@@ -187,7 +187,7 @@ Item {
         }
 
         MenuItem {
-            text: qsTr("Network and Internet settings…")
+            text: i18n("Network and Internet settings…")
             icon: "configure"
             onClicked: KCMLauncher.openSystemSettings("kcm_networkmanagement")
         }
@@ -240,13 +240,13 @@ Item {
         }
 
         MenuItem {
-            text: qsTr("Volume mixer")
+            text: i18n("Volume mixer")
             icon: "audio-volume-medium"
             onClicked: root.requestPage("volume")
         }
 
         MenuItem {
-            text: qsTr("Sound settings…")
+            text: i18n("Sound settings…")
             icon: "configure"
             onClicked: KCMLauncher.openSystemSettings("kcm_pulseaudio")
         }
@@ -257,7 +257,7 @@ Item {
         model: root.sinkFilterModel
 
         delegate: MenuItem {
-            text: Description || Name || qsTr("Unknown device")
+            text: Description || Name || i18n("Unknown device")
             icon: Funcs.volIconName(Volume, Muted)
             checkable: true
             checked: PulseObject && PulseObject.default
@@ -276,13 +276,13 @@ Item {
         placement: root.menuPlacement()
 
         MenuItem {
-            text: qsTr("Screen settings…")
+            text: i18n("Screen settings…")
             icon: "preferences-desktop-display"
             onClicked: KCMLauncher.openSystemSettings("kcm_kscreen")
         }
 
         MenuItem {
-            text: qsTr("Night Light…")
+            text: i18n("Night Light…")
             icon: "night-light-symbolic"
             onClicked: KCMLauncher.openSystemSettings("kcm_nightlight")
         }
@@ -294,7 +294,7 @@ Item {
         placement: root.menuPlacement()
 
         MenuItem {
-            text: qsTr("Battery Saver")
+            text: i18n("Battery Saver")
             icon: "battery-low-symbolic"
             checkable: true
             checked: powerProfiles.activeProfile === "power-saver"
@@ -313,7 +313,7 @@ Item {
         }
 
         MenuItem {
-            text: qsTr("Power settings…")
+            text: i18n("Power settings…")
             icon: "configure"
             onClicked: KCMLauncher.openSystemSettings("kcm_powerdevilprofilesconfig")
         }

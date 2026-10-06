@@ -6,7 +6,7 @@ import "../lib" as Lib
 Lib.Tile {
     id: tile
 
-    label: qsTr("Night Light")
+    label: i18n("Night Light")
     iconSource: {
         if (!nightLight.available)
             return "redshift-status-off-symbolic";
@@ -20,10 +20,10 @@ Lib.Tile {
 
     tooltipText: {
         if (!nightLight.available)
-            return qsTr("Night Light — Unavailable");
+            return i18n("Night Light — Unavailable");
         if (active)
-            return qsTr("Night Light — On");
-        return qsTr("Night Light — Off");
+            return i18n("Night Light — On");
+        return i18n("Night Light — Off");
     }
 
     DBus.Properties {

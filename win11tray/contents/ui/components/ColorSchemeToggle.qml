@@ -10,7 +10,7 @@ Lib.Tile {
 
     property bool darkMode: ColorType.isDark(Kirigami.Theme.backgroundColor)
 
-    label: darkMode ? qsTr("Dark Mode") : qsTr("Light Mode")
+    label: darkMode ? i18n("Dark Mode") : i18n("Light Mode")
     iconSource: darkMode ? "weather-clear-night-symbolic" : "weather-clear-symbolic"
     active: false
 
@@ -26,7 +26,7 @@ Lib.Tile {
         colorschemeExec.exec("plasma-apply-lookandfeel --apply " + target);
     }
 
-    tooltipText: darkMode ? qsTr("Switch to light mode") : qsTr("Switch to dark mode")
+    tooltipText: darkMode ? i18n("Switch to light mode") : i18n("Switch to dark mode")
 
     Plasma5Support.DataSource {
         id: colorschemeExec

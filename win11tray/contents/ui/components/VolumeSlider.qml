@@ -53,7 +53,7 @@ Lib.Slider {
         id: volumeMenu
 
         PlasmaComponents3.MenuItem {
-            text: sinkAvailable && sink.muted ? qsTr("Unmute") : qsTr("Mute")
+            text: sinkAvailable && sink.muted ? i18n("Unmute") : i18n("Mute")
             icon.name: sinkAvailable && sink.muted ? "audio-volume-muted" : "audio-volume-high"
             onClicked: {
                 if (sinkAvailable)
@@ -61,12 +61,12 @@ Lib.Slider {
             }
         }
         PlasmaComponents3.MenuItem {
-            text: qsTr("Test sound")
+            text: i18n("Test sound")
             icon.name: "audio-volume-high"
             onClicked: Vol.VolumeFeedback.play()
         }
         PlasmaComponents3.MenuItem {
-            text: qsTr("Audio settings")
+            text: i18n("Audio settings")
             icon.name: "configure"
             onClicked: Qt.openUrlExternally("systemsettings://kcm_pulseaudio")
         }

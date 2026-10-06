@@ -7,7 +7,7 @@ Lib.Tile {
 
     property bool touchpadEnabled: true
 
-    label: touchpadEnabled ? qsTr("Touchpad On") : qsTr("Touchpad Off")
+    label: touchpadEnabled ? i18n("Touchpad On") : i18n("Touchpad Off")
     iconSource: "input-touchpad"
     active: !touchpadEnabled
 
@@ -31,5 +31,5 @@ Lib.Tile {
         touchpadEnabled = !touchpadEnabled;
     }
 
-    tooltipText: touchpadEnabled ? qsTr("Touchpad — Enabled") : qsTr("Touchpad — Disabled")
+    tooltipText: touchpadEnabled ? i18n("Touchpad — Enabled") : i18n("Touchpad — Disabled")
 }

@@ -10,12 +10,12 @@ import "../lib" as Lib
 Lib.DetailPage {
     id: page
 
-    title: qsTr("Bluetooth")
+    title: i18n("Bluetooth")
     switchChecked: page.btOn
-    emptyText: page.btOn ? qsTr("No devices paired") : qsTr("Bluetooth is off")
+    emptyText: page.btOn ? i18n("No devices paired") : i18n("Bluetooth is off")
 
     footer: Lib.MoreSettingsLink {
-        text: qsTr("More Bluetooth settings")
+        text: i18n("More Bluetooth settings")
         onClicked: KCMLauncher.openSystemSettings("kcm_bluetooth")
     }
 
@@ -35,7 +35,7 @@ Lib.DetailPage {
     listView.header: PlasmaComponents3.Button {
         width: listView.width
         height: 32
-        text: qsTr("Add new device")
+        text: i18n("Add new device")
         icon.name: "list-add"
         flat: true
         visible: page.btOn
@@ -106,7 +106,7 @@ Lib.DetailPage {
                     }
 
                     PlasmaComponents3.Label {
-                        text: modelData.connected ? qsTr("Connected") : qsTr("Disconnected")
+                        text: modelData.connected ? i18n("Connected") : i18n("Disconnected")
                         color: Kirigami.Theme.textColor
                         opacity: modelData.connected ? 0.5 : 0.3
                         font.pixelSize: 9

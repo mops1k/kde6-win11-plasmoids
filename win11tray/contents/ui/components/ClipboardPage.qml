@@ -15,11 +15,11 @@ import "../js/funcs.js" as Funcs
 Lib.Page {
     id: page
 
-    title: qsTr("Clipboard")
+    title: i18n("Clipboard")
     contentFillsHeight: false
 
     footer: Lib.MoreSettingsLink {
-        text: qsTr("More clipboard settings")
+        text: i18n("More clipboard settings")
         onClicked: KCMLauncher.openSystemSettings("kcm_keys")
     }
 
@@ -85,7 +85,7 @@ Lib.Page {
 
                         PlasmaComponents3.Label {
                             Layout.fillWidth: true
-                            text: model.DisplayText || qsTr("(empty)")
+                            text: model.DisplayText || i18n("(empty)")
                             color: Kirigami.Theme.textColor
                             font.pixelSize: 11
                             elide: Text.ElideRight
@@ -106,7 +106,7 @@ Lib.Page {
         PlasmaComponents3.Label {
             Layout.fillWidth: true
             Layout.topMargin: 10
-            text: qsTr("Clipboard is empty")
+            text: i18n("Clipboard is empty")
             color: Kirigami.Theme.textColor
             opacity: 0.5
             font.pixelSize: 11

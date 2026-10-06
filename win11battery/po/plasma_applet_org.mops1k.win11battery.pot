@@ -1,0 +1,490 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-09-28 14:55+0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+
+#: contents/config/config.qml:12
+msgid "Appearance"
+msgstr ""
+
+#: contents/ui/config/ConfigAppearance.qml:31
+msgid "Show the charge percentage inside the battery"
+msgstr ""
+
+#: contents/ui/config/ConfigAppearance.qml:36
+msgid "Show a lightning bolt instead of the number while charging"
+msgstr ""
+
+#: contents/ui/config/ConfigAppearance.qml:42
+msgid "Font size:"
+msgstr ""
+
+#: contents/ui/config/ConfigAppearance.qml:47
+msgid "Automatic"
+msgstr ""
+
+#: contents/ui/config/ConfigAppearance.qml:57
+msgid "Color the fill by the charge level"
+msgstr ""
+
+#: contents/ui/config/ConfigAppearance.qml:63
+msgid "Low threshold:"
+msgstr ""
+
+#: contents/ui/config/ConfigAppearance.qml:69
+#: contents/ui/config/ConfigAppearance.qml:82
+msgctxt "@item:valuesuffix charge percentage"
+msgid "%1%%"
+msgstr ""
+
+#: contents/ui/config/ConfigAppearance.qml:76
+msgid "Medium threshold:"
+msgstr ""
+
+#: contents/ui/config/ConfigAppearance.qml:87
+msgid "Low color:"
+msgstr ""
+
+#: contents/ui/config/ConfigAppearance.qml:99
+#: contents/ui/config/ConfigAppearance.qml:118
+#: contents/ui/config/ConfigAppearance.qml:137
+msgid "Choose…"
+msgstr ""
+
+#: contents/ui/config/ConfigAppearance.qml:106
+msgid "Medium color:"
+msgstr ""
+
+#: contents/ui/config/ConfigAppearance.qml:125
+msgid "High color:"
+msgstr ""
+
+#: contents/ui/config/ConfigAppearance.qml:146
+msgid "Low charge color"
+msgstr ""
+
+#: contents/ui/config/ConfigAppearance.qml:153
+msgid "Medium charge color"
+msgstr ""
+
+#: contents/ui/config/ConfigAppearance.qml:160
+msgid "High charge color"
+msgstr ""
+
+#: contents/ui/main.qml:76
+msgid "The battery applet has enabled suppressing sleep and screen locking"
+msgstr ""
+
+#: contents/ui/main.qml:97
+msgid "Power & Battery"
+msgstr ""
+
+#: contents/ui/main.qml:97 contents/ui/PowerProfileItem.qml:76
+#: contents/ui/InhibitionItem.qml:60
+msgid "Power Management"
+msgstr ""
+
+#: contents/ui/main.qml:116
+msgid "Battery is not present in the bay"
+msgstr ""
+
+#: contents/ui/main.qml:122 contents/ui/BatteryItem.qml:103
+msgid "Fully Charged"
+msgstr ""
+
+#: contents/ui/main.qml:129
+#, javascript-format
+msgid "Battery at %1%, not Charging"
+msgstr ""
+
+#: contents/ui/main.qml:131
+#, javascript-format
+msgid "Battery at %1%, plugged in but still discharging"
+msgstr ""
+
+#: contents/ui/main.qml:133
+#, javascript-format
+msgid "Battery at %1%, Charging"
+msgstr ""
+
+#: contents/ui/main.qml:136
+#, javascript-format
+msgid "Battery at %1%"
+msgstr ""
+
+#: contents/ui/main.qml:144
+msgid "The power supply is not powerful enough to charge the battery"
+msgstr ""
+
+#: contents/ui/main.qml:148
+msgid "No Batteries Available"
+msgstr ""
+
+#: contents/ui/main.qml:155
+msgctxt "time until fully charged - HH:MM"
+msgid "%1 until fully charged"
+msgstr ""
+
+#: contents/ui/main.qml:157
+msgctxt "remaining time left of battery usage - HH:MM"
+msgid "%1 remaining"
+msgstr ""
+
+#: contents/ui/main.qml:160
+msgid "Not charging"
+msgstr ""
+
+#: contents/ui/main.qml:165
+msgid ""
+"Automatic sleep and screen locking are disabled; middle-click to re-enable"
+msgstr ""
+
+#: contents/ui/main.qml:167
+msgid "Middle-click to disable automatic sleep and screen locking"
+msgstr ""
+
+#: contents/ui/main.qml:173
+msgid "An application has requested activating Performance mode"
+msgid_plural "%1 applications have requested activating Performance mode"
+msgstr[0] ""
+msgstr[1] ""
+
+#: contents/ui/main.qml:177
+msgid "System is in Performance mode; scroll to change"
+msgstr ""
+
+#: contents/ui/main.qml:181
+msgid "An application has requested activating Power Save mode"
+msgid_plural "%1 applications have requested activating Power Save mode"
+msgstr[0] ""
+msgstr[1] ""
+
+#: contents/ui/main.qml:185
+msgid "System is in Power Save mode; scroll to change"
+msgstr ""
+
+#: contents/ui/main.qml:188
+msgid "System is in Balanced Power mode; scroll to change"
+msgstr ""
+
+#: contents/ui/main.qml:303
+msgid "&Show Energy Information…"
+msgstr ""
+
+#: contents/ui/main.qml:309
+msgid "Show Battery Percentage on Icon When Not Fully Charged"
+msgstr ""
+
+#: contents/ui/main.qml:322
+msgid "&Configure Power Management…"
+msgstr ""
+
+#: contents/ui/BatteryItem.qml:99
+msgid "Charging"
+msgstr ""
+
+#: contents/ui/BatteryItem.qml:101
+msgid "Discharging"
+msgstr ""
+
+#: contents/ui/BatteryItem.qml:105
+msgid "Not Charging"
+msgstr ""
+
+#: contents/ui/BatteryItem.qml:108
+msgctxt "Battery is currently not present in the bay"
+msgid "Not present"
+msgstr ""
+
+#: contents/ui/BatteryItem.qml:120
+#, javascript-format
+msgctxt "Placeholder is battery percentage"
+msgid "%1%"
+msgstr ""
+
+#: contents/ui/BatteryItem.qml:184
+#, javascript-format
+msgid ""
+"This battery's health is at only %1% and it should be replaced. Contact the "
+"manufacturer."
+msgstr ""
+
+#: contents/ui/BatteryItem.qml:203
+msgid "Time To Full:"
+msgstr ""
+
+#: contents/ui/BatteryItem.qml:204
+msgid "Remaining Time:"
+msgstr ""
+
+#: contents/ui/BatteryItem.qml:210
+msgctxt "@info"
+msgid "Estimating…"
+msgstr ""
+
+#: contents/ui/BatteryItem.qml:220
+msgid "Battery Health:"
+msgstr ""
+
+#: contents/ui/BatteryItem.qml:226
+#, javascript-format
+msgctxt "Placeholder is battery health percentage"
+msgid "%1%"
+msgstr ""
+
+#: contents/ui/BatteryItem.qml:238
+#, javascript-format
+msgid "Battery is configured to charge up to approximately %1%."
+msgstr ""
+
+#: contents/ui/PowerProfileItem.qml:41
+msgid "Power Save"
+msgstr ""
+
+#: contents/ui/PowerProfileItem.qml:45
+msgid "Balanced"
+msgstr ""
+
+#: contents/ui/PowerProfileItem.qml:49
+msgid "Performance"
+msgstr ""
+
+#: contents/ui/PowerProfileItem.qml:66
+msgid "Power Profile"
+msgstr ""
+
+#: contents/ui/PowerProfileItem.qml:110
+msgctxt "Power profile"
+msgid "Automatic"
+msgstr ""
+
+#: contents/ui/PowerProfileItem.qml:111
+msgctxt "Power profile"
+msgid "Not available"
+msgstr ""
+
+#: contents/ui/PowerProfileItem.qml:151
+msgid "Failed to activate %1 mode"
+msgstr ""
+
+#: contents/ui/PowerProfileItem.qml:228
+msgid ""
+"Performance mode has been disabled to reduce heat generation because the "
+"computer has detected that it may be sitting on your lap."
+msgstr ""
+
+#: contents/ui/PowerProfileItem.qml:230
+msgid ""
+"Performance mode is unavailable because the computer is running too hot."
+msgstr ""
+
+#: contents/ui/PowerProfileItem.qml:232
+msgid "Performance mode is unavailable."
+msgstr ""
+
+#: contents/ui/PowerProfileItem.qml:248
+msgid ""
+"Performance may be lowered to reduce heat generation because the computer "
+"has detected that it may be sitting on your lap."
+msgstr ""
+
+#: contents/ui/PowerProfileItem.qml:250
+msgid "Performance may be reduced because the computer is running too hot."
+msgstr ""
+
+#: contents/ui/PowerProfileItem.qml:252
+msgid "Performance may be reduced."
+msgstr ""
+
+#: contents/ui/PowerProfileItem.qml:265
+msgid "One application has requested activating %2:"
+msgid_plural "%1 applications have requested activating %2:"
+msgstr[0] ""
+msgstr[1] ""
+
+#: contents/ui/PowerProfileItem.qml:284
+msgctxt ""
+"%1 is the name of the application, %2 is the reason provided by it for "
+"activating performance mode"
+msgid "%1: %2"
+msgstr ""
+
+#: contents/ui/PowerProfileItem.qml:302
+msgid "The TLP service automatically controls power profiles"
+msgstr ""
+
+#: contents/ui/PowerProfileItem.qml:304
+msgid "Power profiles are not supported on your device."
+msgstr ""
+
+#: contents/ui/PowerProfileItem.qml:305
+msgid ""
+"Power profiles may be supported on your device.<nl/>Try installing the "
+"<command>power-profiles-daemon</command> package using your distribution's "
+"package manager and restarting the system."
+msgstr ""
+
+#: contents/ui/InhibitionItem.qml:53
+msgctxt "@title:group"
+msgid "Sleep and Screen Locking after Inactivity"
+msgstr ""
+
+#: contents/ui/InhibitionItem.qml:65
+msgctxt "accessible-only status text"
+msgid "Automatic sleep and screen locking are currently blocked."
+msgstr ""
+
+#: contents/ui/InhibitionItem.qml:67
+msgctxt "accessible-only status text"
+msgid ""
+"Screen locking is currently blocked. Sleep is automatic after inactivity."
+msgstr ""
+
+#: contents/ui/InhibitionItem.qml:69
+msgctxt "accessible-only status text"
+msgid ""
+"Sleep is currently blocked. Screen locking is automatic after inactivity."
+msgstr ""
+
+#: contents/ui/InhibitionItem.qml:71
+msgctxt "accessible-only status text"
+msgid "Sleep and screen locking are automatic after inactivity."
+msgstr ""
+
+#: contents/ui/InhibitionItem.qml:95
+msgctxt "@action:button Block sleep and screen locking after inactivity"
+msgid "Manually Block Sleep and Screen Locking"
+msgstr ""
+
+#: contents/ui/InhibitionItem.qml:118
+msgid "Failed to unblock automatic sleep and screen locking"
+msgstr ""
+
+#: contents/ui/InhibitionItem.qml:121
+msgid "Failed to block automatic sleep and screen locking"
+msgstr ""
+
+#: contents/ui/InhibitionItem.qml:135
+msgctxt ""
+"@label corresponding to Manually Block Sleep and Screen Locking toggle"
+msgid "This will result in higher energy consumption."
+msgstr ""
+
+#: contents/ui/InhibitionItem.qml:136
+msgctxt ""
+"@label accessible - the sentence about higher energy consumption must be "
+"included (EU regulations)"
+msgid ""
+"You have manually blocked automatic sleep and screen locking. This will "
+"result in higher energy consumption."
+msgstr ""
+
+#: contents/ui/InhibitionItem.qml:143
+msgctxt "Minimize the length of this string as much as possible"
+msgid ""
+"Your laptop is configured not to sleep when closing the lid while an "
+"external monitor is connected."
+msgstr ""
+
+#: contents/ui/InhibitionItem.qml:162
+msgctxt "An application's reason for inhibiting sleep and/or screen locking"
+msgid "Unknown reason."
+msgstr ""
+
+#: contents/ui/InhibitionItem.qml:169
+msgctxt ""
+"Application (1) with reason (2) has been prevented from blocking this "
+"inactivity behavior. The user can choose to allow it again."
+msgid "%1 wants to block sleep and screen locking. (%2)"
+msgstr ""
+
+#: contents/ui/InhibitionItem.qml:171
+msgctxt ""
+"Application (1) with reason (2) has been prevented from blocking this "
+"inactivity behavior. The user can choose to allow it again."
+msgid "%1 wants to block screen locking. (%2)"
+msgstr ""
+
+#: contents/ui/InhibitionItem.qml:173
+msgctxt ""
+"Application (1) with reason (2) has been prevented from blocking this "
+"inactivity behavior. The user can choose to allow it again."
+msgid "%1 wants to block sleep. (%2)"
+msgstr ""
+
+#: contents/ui/InhibitionItem.qml:177
+msgctxt ""
+"Application (1) with reason (2) is currently blocking this inactivity "
+"behavior, in addition to the user's manual block switch."
+msgid "%1 is also blocking sleep and screen locking. (%2)"
+msgstr ""
+
+#: contents/ui/InhibitionItem.qml:179
+msgctxt ""
+"Application (1) with reason (2) is currently blocking this inactivity "
+"behavior, in addition to the user's manual block switch."
+msgid "%1 is also blocking screen locking. (%2)"
+msgstr ""
+
+#: contents/ui/InhibitionItem.qml:181
+msgctxt ""
+"Application (1) with reason (2) is currently blocking this inactivity "
+"behavior, in addition to the user's manual block switch."
+msgid "%1 is also blocking sleep. (%2)"
+msgstr ""
+
+#: contents/ui/InhibitionItem.qml:185
+msgctxt ""
+"Application (1) with reason (2) is currently blocking this inactivity "
+"behavior, the user can choose to unblock it."
+msgid "%1 is blocking sleep and screen locking. (%2)"
+msgstr ""
+
+#: contents/ui/InhibitionItem.qml:187
+msgctxt ""
+"Application (1) with reason (2) is currently blocking this inactivity "
+"behavior, the user can choose to unblock it."
+msgid "%1 is blocking screen locking. (%2)"
+msgstr ""
+
+#: contents/ui/InhibitionItem.qml:189
+msgctxt ""
+"Application (1) with reason (2) is currently blocking this inactivity "
+"behavior, the user can choose to unblock it."
+msgid "%1 is blocking sleep. (%2)"
+msgstr ""
+
+#: contents/ui/InhibitionItem.qml:197
+msgctxt ""
+"@action:button Prevent an app from blocking automatic sleep and screen "
+"locking after inactivity"
+msgid "Unblock"
+msgstr ""
+
+#: contents/ui/InhibitionItem.qml:205
+msgctxt ""
+"@action:button Undo preventing an app from blocking automatic sleep and "
+"screen locking after inactivity"
+msgid "Allow"
+msgstr ""
+
+#: contents/ui/CompactRepresentation.qml:145
+#, javascript-format
+msgctxt "battery percentage below battery icon"
+msgid "%1%"
+msgstr ""

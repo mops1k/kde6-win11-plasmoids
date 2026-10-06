@@ -5,7 +5,7 @@ import "../lib" as Lib
 Lib.Tile {
     id: tile
 
-    label: qsTr("Invert Colors")
+    label: i18n("Invert Colors")
     iconSource: "preferences-desktop-effects"
     active: false
 
@@ -19,5 +19,5 @@ Lib.Tile {
         });
     }
 
-    tooltipText: qsTr("Invert Colors — Toggle")
+    tooltipText: i18n("Invert Colors — Toggle")
 }
