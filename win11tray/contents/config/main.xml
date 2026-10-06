@@ -130,6 +130,10 @@
     <entry name="showHotspot" type="Bool">
       <default>true</default>
     </entry>
+    <entry name="showDisplay" type="Bool">
+      <label>Show the display (monitor output mode) tile in the quick settings popup</label>
+      <default>true</default>
+    </entry>
     <entry name="showTouchpad" type="Bool">
       <default>true</default>
     </entry>

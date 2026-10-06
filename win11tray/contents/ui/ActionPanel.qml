@@ -68,6 +68,14 @@ ColumnLayout {
             Layout.fillWidth: true
             visible: Plasmoid.configuration.showHotspot
         }
+        // Плитка управления мониторами (аналог «Проецирования» в Windows 11):
+        // открывает страницу с режимами вывода.
+        Components.DisplayTile {
+            Layout.fillWidth: true
+            visible: Plasmoid.configuration.showDisplay
+            onClicked: actionPanel.requestPage("display")
+            onArrowClicked: actionPanel.requestPage("display")
+        }
     }
 
     GridLayout {

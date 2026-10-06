@@ -176,6 +176,7 @@ ecm_target_qml_sources(org.mops1k.win11tray
         ${CMAKE_CURRENT_SOURCE_DIR}/contents/ui/js/funcs.js
         ${CMAKE_CURRENT_SOURCE_DIR}/contents/ui/js/colorType.js
         ${CMAKE_CURRENT_SOURCE_DIR}/contents/ui/js/systrayorder.js
+        ${CMAKE_CURRENT_SOURCE_DIR}/contents/ui/js/displaymodes.js
 )
 ecm_target_qml_sources(org.mops1k.win11tray
     PATH components
@@ -207,6 +208,8 @@ ecm_target_qml_sources(org.mops1k.win11tray
         ${CMAKE_CURRENT_SOURCE_DIR}/contents/ui/components/InhibitSleepToggle.qml
         ${CMAKE_CURRENT_SOURCE_DIR}/contents/ui/components/TouchpadToggle.qml
         ${CMAKE_CURRENT_SOURCE_DIR}/contents/ui/components/KeyboardBrightnessSlider.qml
+        ${CMAKE_CURRENT_SOURCE_DIR}/contents/ui/components/DisplayTile.qml
+        ${CMAKE_CURRENT_SOURCE_DIR}/contents/ui/components/DisplayPage.qml
         ${CMAKE_CURRENT_SOURCE_DIR}/contents/ui/components/Footer.qml
         ${CMAKE_CURRENT_SOURCE_DIR}/contents/ui/components/ClipboardPage.qml
         ${CMAKE_CURRENT_SOURCE_DIR}/contents/ui/components/NotificationsPage.qml

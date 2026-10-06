@@ -169,7 +169,8 @@ QQC2.StackView {
         "clipboard":       clipboardPageComp,
         "notifications":   notificationsPageComp,
         "devicenotifier":  deviceNotifierPageComp,
-        "mediacontroller": mediaControllerPageComp
+        "mediacontroller": mediaControllerPageComp,
+        "display":         displayPageComp
     })
 
     Component {
@@ -217,6 +218,12 @@ QQC2.StackView {
     Component {
         id: mediaControllerPageComp
         Components.MediaControllerPage {
+            onBack: systemTrayState.pageBack()
+        }
+    }
+    Component {
+        id: displayPageComp
+        Components.DisplayPage {
             onBack: systemTrayState.pageBack()
         }
     }
