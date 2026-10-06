@@ -17,9 +17,12 @@ Plasma 6: `win11tray`, `win11tasks` (C++/CMake) и `win11battery`,
   `build-*/`, `dist/`, `*.plasmoid`, `.dsh/` (планы и состояние сессий DSH).
 - Идентичность репозитория задана локально: `mops1k`
   <mops1k@users.noreply.github.com>.
-- Установка всех плазмоидов — `./scripts/install.sh` (whiptail-выбор,
-  `--all`, `--only`, `--list`, `--no-restart`); реальная установка меняет
-  `~/.local` и перезапускает `plasmashell`.
+- Установка всех плазмоидов — `./scripts/install.sh` (zenity-чекбоксы,
+  fallback whiptail → текстовое меню; `--all`, `--only`, `--list`,
+  `--no-switch`, `--no-restart`); после установки отмеченные плазмоиды
+  автоматически переключаются на свои в панели (один цикл stop/start
+  `plasmashell`, правку appletsrc делают `win11*/scripts/switch-*.sh
+  --no-restart`); реальная установка меняет `~/.local`.
 - Режим «плавающей» панели — `./scripts/panel-floating.sh`
   (`status`/`off`/`on`/`toggle`, `--panel <id|all>`, `--no-persist`):
   в Plasma 6 панель сама открепляется на рабочем столе, и поповеры панельных

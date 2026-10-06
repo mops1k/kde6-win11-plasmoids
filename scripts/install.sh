@@ -1,13 +1,17 @@
 #!/usr/bin/env bash
 # Установка плазмоидов Win11 из монорепо.
-# Без аргументов — интерактивный выбор: whiptail-чекбоксы, при их отсутствии
-# или без TTY — текстовое нумерованное меню.
+# Без аргументов — интерактивный выбор: zenity-чекбоксы (GUI), при его
+# отсутствии — whiptail, иначе текстовое нумерованное меню.
+# После установки отмеченные плазмоиды переключаются на свои в панели:
+# plasmashell останавливается один раз, switch-скрипты правят appletsrc
+# с --no-restart, затем панель запускается снова.
 #
 #   --list                показать плазмоиды и выйти
 #   --all                 установить все
 #   --only <a,b|a b>      установить только перечисленные (можно повторять)
 #   --no-build            не пересобирать C++-плазмоиды (использовать build/)
-#   --no-restart          не перезапускать plasmashell
+#   --no-switch           не переключать плазмоиды в панели
+#   --no-restart          не перезапускать plasmashell (переключение пропускается)
 #   -h, --help            эта справка
 set -euo pipefail
 
@@ -30,6 +34,13 @@ declare -A PLUGIN_KIND=(
     [win11clock]="QML"
     [win11keyboardlayout]="QML"
 )
+declare -A PLUGIN_SWITCH=(
+    [win11tray]="win11tray/scripts/switch-tray.sh"
+    [win11tasks]="win11tasks/scripts/switch-tasks.sh"
+    [win11battery]="win11battery/scripts/switch-battery.sh"
+    [win11clock]="win11clock/scripts/switch-clock.sh"
+    [win11keyboardlayout]="win11keyboardlayout/scripts/switch-widget.sh"
+)
 declare -A PLUGIN_DESC=(
     [win11tray]="Трей: замена системного трея, поповер быстрых настроек"
     [win11tasks]="Таскбар icons-only с Win11-тултипами и превью"
@@ -40,10 +51,11 @@ declare -A PLUGIN_DESC=(
 
 BUILD=1
 RESTART=1
+SWITCH=1
 MODE=""          # list | all | only | interactive
 ONLY=()
 
-usage() { sed -n '2,11p' "$0" | sed 's/^# \{0,1\}//'; }
+usage() { sed -n '2,15p' "$0" | sed 's/^# \{0,1\}//'; }
 
 fail() { echo "Ошибка: $*" >&2; exit 2; }
 
@@ -80,8 +92,42 @@ normalize_selection() {
     done
 }
 
+# zenity-чекбоксы: печатает выбранные каталоги, 0 — выбор, 1 — отмена,
+# 2 — zenity недоступен (нет утилиты или GUI-сессии).
+ask_zenity() {
+    command -v zenity >/dev/null 2>&1 || return 2
+    [ -n "${WAYLAND_DISPLAY:-}${DISPLAY:-}" ] || return 2
+
+    local -a items=()
+    local p
+    for p in "${PLUGIN_ORDER[@]}"; do
+        items+=(FALSE "$p" "${PLUGIN_KIND[$p]}" "${PLUGIN_DESC[$p]}")
+    done
+
+    local selection
+    if ! selection="$(zenity --list --checklist \
+        --title "Плазмоиды Win11" \
+        --text "Отметьте плазмоиды для установки — после установки они будут переключены на свои в панели:" \
+        --column "Установить" --column "Плазмоид" --column "Тип" --column "Описание" \
+        --print-column=2 --separator=" " --width 880 --height 420 \
+        "${items[@]}" 2>/dev/null)"; then
+        return 1
+    fi
+    normalize_selection $selection
+}
+
 ask_interactive() {
-    local selection=""
+    local selection="" rc=0
+    if selection="$(ask_zenity)"; then
+        printf '%s\n' "$selection"
+        return 0
+    else
+        rc=$?
+    fi
+    if [ "$rc" = 1 ]; then
+        return 1
+    fi
+
     if command -v whiptail >/dev/null 2>&1 && [ -r /dev/tty ] && [ -w /dev/tty ] \
         && [ -n "${TERM:-}" ] && [ "$TERM" != "dumb" ]; then
         local -a items=()
@@ -165,6 +211,54 @@ install_one() {
     return 1
 }
 
+# Переключение плазмоидов на свои в панели: plasmashell останавливается один
+# раз, каждый switch-скрипт правит appletsrc с --no-restart, затем панель
+# запускается снова. Сбой отдельного переключения — предупреждение, не ошибка.
+declare -a SWITCH_FAILED=()
+switch_installed() {
+    local p script
+    local plasma_was_active=0
+    SWITCH_FAILED=()
+
+    echo
+    echo "==> Переключение в панели: $*"
+    if systemctl --user is-active --quiet plasma-plasmashell.service; then
+        plasma_was_active=1
+    fi
+    systemctl --user stop plasma-plasmashell.service 2>/dev/null || true
+
+    for p in "$@"; do
+        script="$REPO_ROOT/${PLUGIN_SWITCH[$p]}"
+        if [ ! -x "$script" ]; then
+            echo "==> ${p}: нет исполняемого $script" >&2
+            SWITCH_FAILED+=("$p")
+            continue
+        fi
+        if "$script" --no-restart; then
+            echo "==> ${p}: переключён в панели"
+        else
+            echo "==> ${p}: НЕ переключён в панели (см. сообщение скрипта)" >&2
+            SWITCH_FAILED+=("$p")
+        fi
+    done
+
+    systemctl --user reset-failed plasma-plasmashell.service 2>/dev/null || true
+    if [ "$plasma_was_active" = 1 ]; then
+        systemctl --user start plasma-plasmashell.service
+        sleep 2
+    else
+        echo "==> plasmashell не был запущен — запуск не выполняю" >&2
+    fi
+}
+
+restart_plasma() {
+    echo
+    echo "==> Перезапуск plasmashell"
+    systemctl --user reset-failed plasma-plasmashell.service 2>/dev/null || true
+    systemctl --user restart plasma-plasmashell.service
+    sleep 2
+}
+
 # --- разбор аргументов -------------------------------------------------------
 while (($#)); do
     case "$1" in
@@ -183,6 +277,7 @@ while (($#)); do
             ONLY+=("${_parts[@]}")
             ;;
         --no-build) BUILD=0 ;;
+        --no-switch) SWITCH=0 ;;
         --no-restart) RESTART=0 ;;
         -h|--help) usage; exit 0 ;;
         *) fail "неизвестный аргумент: $1 (см. --help)" ;;
@@ -215,18 +310,40 @@ echo "К установке: ${SELECTED[*]}"
 check_deps "${SELECTED[@]}"
 
 ok=0; bad=0
+declare -a INSTALLED_OK=()
 for p in "${SELECTED[@]}"; do
-    if install_one "$p"; then ok=$((ok + 1)); else bad=$((bad + 1)); fi
+    if install_one "$p"; then
+        ok=$((ok + 1))
+        INSTALLED_OK+=("$p")
+    else
+        bad=$((bad + 1))
+    fi
 done
 
-if [ "$RESTART" = 1 ] && [ "$ok" -gt 0 ]; then
+sw_ok=0; sw_bad=0; switch_done=0
+if [ "$ok" -gt 0 ] && [ "$RESTART" = 1 ]; then
+    if [ "$SWITCH" = 1 ]; then
+        switch_installed "${INSTALLED_OK[@]}"
+        switch_done=1
+        sw_bad=${#SWITCH_FAILED[@]}
+        sw_ok=$((ok - sw_bad))
+    else
+        echo
+        echo "==> Переключение в панели пропущено (--no-switch)"
+        restart_plasma
+    fi
+elif [ "$RESTART" = 0 ]; then
     echo
-    echo "==> Перезапуск plasmashell"
-    systemctl --user reset-failed plasma-plasmashell.service 2>/dev/null || true
-    systemctl --user restart plasma-plasmashell.service
-    sleep 2
+    echo "==> Переключение в панели пропущено (--no-restart)"
 fi
 
 echo
-echo "Итог: установлено $ok, ошибок $bad"
+if [ "$switch_done" = 1 ]; then
+    echo "Итог: установлено $ok, ошибок $bad; переключено $sw_ok, не удалось $sw_bad"
+    if ((${#SWITCH_FAILED[@]})); then
+        echo "Не переключены: ${SWITCH_FAILED[*]}" >&2
+    fi
+else
+    echo "Итог: установлено $ok, ошибок $bad; переключение в панели не выполнялось"
+fi
 [ "$bad" = 0 ] || exit 1

@@ -17,7 +17,7 @@ KPackage в `~/.local/share/plasma/plasmoids/` ставить НЕЛЬЗЯ.
 ./scripts/install-local.sh          # сборка + установка в ~/.local + рестарт plasmashell
 ./scripts/install-local.sh --no-build
 ./scripts/uninstall-local.sh [--restore]
-./scripts/switch-tasks.sh [--revert]   # замена системного icontasks в панели
+./scripts/switch-tasks.sh [--revert] [--no-restart]   # замена системного icontasks в панели
 ```
 
 Префикс установки — `$HOME/.local`; плагин попадает в

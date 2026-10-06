@@ -15,7 +15,7 @@ QML-плазмоид `org.mops1k.win11keyboardlayout` (KPackageStructure
 
 ```bash
 ./scripts/install-local.sh [--no-restart]
-./scripts/switch-widget.sh [--revert]     # правка appletsrc при остановленном plasmashell
+./scripts/switch-widget.sh [--revert] [--no-restart]   # правка appletsrc при остановленном plasmashell
 ./scripts/uninstall-local.sh [--restore]
 ```
 

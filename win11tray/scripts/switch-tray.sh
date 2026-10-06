@@ -3,6 +3,8 @@
 # Делает бэкап appletsrc и меняет plugin= у существующего апплета трея,
 # сохраняя его id, позицию и дочерние апплеты.
 #   --revert  вернуть системный трей из последнего бэкапа
+#   --no-restart  не перезапускать plasmashell (панель перезапускает
+#                 вызывающий скрипт)
 set -euo pipefail
 
 APP_ID="org.mops1k.win11tray"
@@ -10,11 +12,13 @@ SYS_TRAY="org.kde.plasma.systemtray"
 LAYOUT_FILE="$HOME/.config/plasma-org.kde.plasma.desktop-appletsrc"
 PLUGIN_FILE="$HOME/.local/lib/qt6/plugins/plasma/applets/${APP_ID}.so"
 REVERT=0
+NO_RESTART=0
 
 for arg in "$@"; do
     case "$arg" in
         --revert) REVERT=1 ;;
-        -h|--help) sed -n '2,6p' "$0"; exit 0 ;;
+        --no-restart) NO_RESTART=1 ;;
+        -h|--help) sed -n '2,7p' "$0"; exit 0 ;;
         *) echo "Неизвестный аргумент: $arg" >&2; exit 2 ;;
     esac
 done
@@ -26,7 +30,9 @@ if [ "$REVERT" = 1 ]; then
     [ -n "$BACKUP" ] || { echo "Бэкап не найден" >&2; exit 1; }
     cp "$BACKUP" "$LAYOUT_FILE"
     echo "==> Системный трей возвращён из $BACKUP"
-    systemctl --user restart plasma-plasmashell.service
+    if [ "$NO_RESTART" = 0 ]; then
+        systemctl --user restart plasma-plasmashell.service
+    fi
     exit 0
 fi
 
@@ -50,5 +56,7 @@ fi
 
 sed -i "s|^plugin=${SYS_TRAY}$|plugin=${APP_ID}|" "$LAYOUT_FILE"
 echo "==> ${SYS_TRAY} -> ${APP_ID}"
-systemctl --user restart plasma-plasmashell.service
+if [ "$NO_RESTART" = 0 ]; then
+    systemctl --user restart plasma-plasmashell.service
+fi
 echo "Готово. Откат: $0 --revert"

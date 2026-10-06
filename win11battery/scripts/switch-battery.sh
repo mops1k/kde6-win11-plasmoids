@@ -5,6 +5,8 @@
 # системный апплет EnabledByDefault, поэтому его id должен остаться в
 # knownItems, но уйти из extraItems). Бэкап appletsrc делается здесь.
 #   --revert  вернуть системный апплет из последнего бэкапа
+#   --no-restart  не останавливать и не запускать plasmashell
+#                 (правка выполняется при уже остановленной панели)
 set -euo pipefail
 
 APP_ID="org.mops1k.win11battery"
@@ -12,11 +14,13 @@ SYS_APP="org.kde.plasma.battery"
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 LAYOUT_FILE="$HOME/.config/plasma-org.kde.plasma.desktop-appletsrc"
 REVERT=0
+NO_RESTART=0
 
 for arg in "$@"; do
     case "$arg" in
         --revert) REVERT=1 ;;
-        -h|--help) sed -n '2,7p' "$0"; exit 0 ;;
+        --no-restart) NO_RESTART=1 ;;
+        -h|--help) sed -n '2,9p' "$0"; exit 0 ;;
         *) echo "Неизвестный аргумент: $arg" >&2; exit 2 ;;
     esac
 done
@@ -35,7 +39,11 @@ with_plasma_stopped() {
 if [ "$REVERT" = 1 ]; then
     BACKUP="$(ls -1t "$LAYOUT_FILE".win11battery-bak-* 2>/dev/null | head -1 || true)"
     [ -n "$BACKUP" ] || { echo "Бэкап не найден" >&2; exit 1; }
-    with_plasma_stopped cp "$BACKUP" "$LAYOUT_FILE"
+    if [ "$NO_RESTART" = 1 ]; then
+        cp "$BACKUP" "$LAYOUT_FILE"
+    else
+        with_plasma_stopped cp "$BACKUP" "$LAYOUT_FILE"
+    fi
     echo "==> Системный апплет батареи возвращён из $BACKUP"
     exit 0
 fi
@@ -49,5 +57,9 @@ BACKUP="$LAYOUT_FILE.win11battery-bak-$(date +%Y%m%d-%H%M%S)"
 cp "$LAYOUT_FILE" "$BACKUP"
 echo "==> Бэкап: $BACKUP"
 
-with_plasma_stopped python3 "$SCRIPT_DIR/appletsrc-tool.py" --apply "$LAYOUT_FILE"
+if [ "$NO_RESTART" = 1 ]; then
+    python3 "$SCRIPT_DIR/appletsrc-tool.py" --apply "$LAYOUT_FILE"
+else
+    with_plasma_stopped python3 "$SCRIPT_DIR/appletsrc-tool.py" --apply "$LAYOUT_FILE"
+fi
 echo "Готово. Откат: $0 --revert"
