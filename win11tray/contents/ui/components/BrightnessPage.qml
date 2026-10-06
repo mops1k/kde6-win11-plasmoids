@@ -128,7 +128,7 @@ Lib.Page {
     footer: ColumnLayout {
         Lib.MoreSettingsLink {
             text: qsTr("Night color settings")
-            onClicked: KCMLauncher.openSystemSettings("kcm_nightcolor")
+            onClicked: KCMLauncher.openSystemSettings("kcm_nightlight")
         }
         Lib.MoreSettingsLink {
             text: qsTr("Display settings")

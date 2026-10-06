@@ -24,6 +24,9 @@ Item {
     default property alias content: holder.data
 
     signal clicked
+    // Правый клик по значку: у значка своё контекстное меню (сеть, звук,
+    // яркость, батарея), как в Windows 11, а не меню апплета трея.
+    signal rightClicked
 
     implicitWidth: iconSize + 2 * iconPadding
     implicitHeight: implicitWidth
@@ -51,6 +54,16 @@ Item {
         anchors.fill: parent
         hoverEnabled: true
         cursorShape: Qt.PointingHandCursor
-        onClicked: root.clicked()
+        // Правая кнопка тоже принимается: иначе событие всплывает до панели и
+        // Plasma показывает контекстное меню апплета («Настроить системный
+        // трей») вместо меню самого значка.
+        acceptedButtons: Qt.LeftButton | Qt.RightButton
+        onClicked: mouse => {
+            if (mouse.button === Qt.RightButton) {
+                root.rightClicked();
+            } else {
+                root.clicked();
+            }
+        }
     }
 }

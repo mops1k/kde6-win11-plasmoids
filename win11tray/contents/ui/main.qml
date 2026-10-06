@@ -597,6 +597,8 @@ ContainmentItem {
 
                 onIconClicked: systemTrayState.toggleQuickSettings()
                 onEmptyAreaClicked: systemTrayState.toggleQuickSettings()
+                // Пункт «Микшер громкости» контекстного меню значка звука.
+                onRequestPage: name => systemTrayState.openPage(name)
             }
         }
 
