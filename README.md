@@ -40,7 +40,10 @@
 ### 1. Требования
 
 KDE Plasma 6 на Wayland (KWin). Проверено на Plasma 6.7.5, Qt 6.11.2, KF6 6.30
-(CachyOS/Arch). Пакеты для сборки:
+(CachyOS/Arch); сборка C++-плазмоидов проверена и на Plasma 6.8.0. Различия
+API между 6.7 и 6.8 (`loadApplet`/`addApplet` на `std::unique_ptr`,
+удалённый `PlasmaQuick::SharedQmlEngine`) учтены в `win11tray` и `win11tasks`.
+Пакеты для сборки:
 
 ```bash
 sudo pacman -S --needed base-devel cmake extra-cmake-modules kpackage gettext \

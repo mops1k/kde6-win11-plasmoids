@@ -24,6 +24,15 @@ KPackage в `~/.local/share/plasma/plasmoids/` ставить НЕЛЬЗЯ (да
 `~/.local/lib/qt6/plugins/plasma/applets/`. Локальная копия .so имеет
 приоритет над системной — это и есть механизм подмены без root.
 
+## Совместимость Plasma 6.7 / 6.8
+
+В Plasma 6.8 `Plasma::PluginLoader::loadApplet()` возвращает
+`std::unique_ptr<Plasma::Applet>`, а `Plasma::Containment::addApplet()` его же
+и принимает; в 6.7 это были сырые указатели. `SystemTray::startApplet()`
+(`systemtray.cpp`) ветвится по `PLASMA_VERSION` из `<Plasma/plasma_version.h>`
+и одинаково собирается на обеих версиях — при обновлении API ветку для 6.7
+удалять только вместе с поддержкой 6.7.
+
 ## Правила проекта
 
 - Язык общения, комментариев в документации и сообщений задач — русский;

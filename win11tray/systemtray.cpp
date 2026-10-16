@@ -30,6 +30,7 @@
 #include <Plasma/Applet>
 #include <Plasma/Corona>
 #include <Plasma/PluginLoader>
+#include <Plasma/plasma_version.h>
 
 #include <KAcceleratorManager>
 #include <KActionCollection>
@@ -422,13 +423,19 @@ void SystemTray::startApplet(const QString &pluginId)
     qCDebug(SYSTEM_TRAY) << "Adding applet:" << pluginId;
 
     if (m_configGroupIds.contains(pluginId)) {
-        Applet *applet = Plasma::PluginLoader::self()->loadApplet(pluginId, m_configGroupIds.value(pluginId), QVariantList());
+        // Plasma 6.8 перевёл loadApplet()/addApplet() на std::unique_ptr;
+        // в 6.7 и раньше это были сырые указатели — ветвимся по версии libplasma.
+        auto applet = Plasma::PluginLoader::self()->loadApplet(pluginId, m_configGroupIds.value(pluginId), QVariantList());
         if (!applet) {
             qCWarning(SYSTEM_TRAY) << "Unable to find applet" << pluginId;
             return;
         }
         applet->setProperty("org.kde.plasma:force-create", true);
+#if PLASMA_VERSION >= QT_VERSION_CHECK(6, 8, 0)
+        addApplet(std::move(applet));
+#else
         addApplet(applet);
+#endif
     } else {
         Applet *applet = createApplet(pluginId, QVariantList() << u"org.kde.plasma:force-create"_s);
         if (applet) {

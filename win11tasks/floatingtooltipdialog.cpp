@@ -8,15 +8,16 @@
 #include <QDebug>
 #include <QFile>
 #include <QPlatformSurfaceEvent>
+#include <QQmlComponent>
 #include <QQmlEngine>
 #include <QQuickItem>
 
 #include <KWindowSystem>
-#include <PlasmaQuick/SharedQmlEngine>
 
 FloatingToolTipDialog::FloatingToolTipDialog()
     : PopupPlasmaWindow(QStringLiteral("widgets/tooltip"))
-    , m_qmlObject(nullptr)
+    , m_qmlEngine(nullptr)
+    , m_qmlComponent(nullptr)
     , m_hideTimeout(-1)
     , m_interactive(false)
     , m_owner(nullptr)
@@ -50,7 +51,11 @@ FloatingToolTipDialog::FloatingToolTipDialog()
     });
 }
 
-FloatingToolTipDialog::~FloatingToolTipDialog() = default;
+FloatingToolTipDialog::~FloatingToolTipDialog()
+{
+    // Объект создан нами (CppOwnership), движок его не удалит.
+    delete m_defaultItem;
+}
 
 void FloatingToolTipDialog::updateSize()
 {
@@ -68,15 +73,32 @@ void FloatingToolTipDialog::updateSize()
 
 QQuickItem *FloatingToolTipDialog::loadDefaultItem()
 {
-    if (!m_qmlObject) {
-        m_qmlObject = new PlasmaQuick::SharedQmlEngine(this);
+    // Plasma 6.8 удалила PlasmaQuick::SharedQmlEngine, поэтому движок и
+    // компонент держим сами; грузим тот же тип org.kde.plasma.core/DefaultToolTip.
+    // Используются только давние API Qt (loadFromModule есть с Qt 6.5),
+    // так что код одинаково собирается и на Plasma 6.7, и на 6.8.
+    if (!m_qmlEngine) {
+        m_qmlEngine = new QQmlEngine(this);
+        m_qmlComponent = new QQmlComponent(m_qmlEngine, this);
+        m_qmlComponent->loadFromModule(QStringLiteral("org.kde.plasma.core"), QStringLiteral("DefaultToolTip"));
+        if (m_qmlComponent->isError()) {
+            qWarning() << "FloatingToolTipDialog: не удалось загрузить org.kde.plasma.core/DefaultToolTip:" << m_qmlComponent->errors();
+            return nullptr;
+        }
     }
 
-    if (!m_qmlObject->rootObject()) {
-        m_qmlObject->setSourceFromModule("org.kde.plasma.core", "DefaultToolTip");
+    if (!m_defaultItem) {
+        if (QObject *object = m_qmlComponent->create()) {
+            if (auto *item = qobject_cast<QQuickItem *>(object)) {
+                QQmlEngine::setObjectOwnership(item, QQmlEngine::CppOwnership);
+                m_defaultItem = item;
+            } else {
+                delete object;
+            }
+        }
     }
 
-    return qobject_cast<QQuickItem *>(m_qmlObject->rootObject());
+    return m_defaultItem;
 }
 
 void FloatingToolTipDialog::showEvent(QShowEvent *event)

@@ -25,6 +25,18 @@ KPackage в `~/.local/share/plasma/plasmoids/` ставить НЕЛЬЗЯ.
 `QT_PLUGIN_PATH=$HOME/.local/lib/qt6/plugins` (drop-in plasmashell; общий с
 проектом `win11tray`).
 
+## Совместимость Plasma 6.7 / 6.8
+
+Plasma 6.8 удалила из libplasma класс `PlasmaQuick::SharedQmlEngine`, на
+котором был построен `floatingtooltipdialog.cpp`. Вместо него движок и
+компонент создаются локально (`QQmlEngine` + `QQmlComponent::loadFromModule`
+для `org.kde.plasma.core/DefaultToolTip`); используются только давние API Qt
+(`loadFromModule` есть с Qt 6.5), поэтому файл собирается и на 6.7, и на 6.8.
+Это запасной путь: `Task.qml` всегда задаёт `mainItem` из QML, так что
+`loadDefaultItem()` вызывается только если делегат тултипа не создан.
+Удалить эти файлы можно, только если QML переедет на `PlasmaCore.ToolTipArea`
+(как в апстрим-таскбаре Plasma 6.8).
+
 ## Правила проекта
 
 - Язык общения, комментариев в документации и сообщений задач — русский;

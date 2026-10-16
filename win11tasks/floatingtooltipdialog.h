@@ -8,16 +8,14 @@
 
 #include <PlasmaQuick/PopupPlasmaWindow>
 
+#include <QPointer>
 #include <QQuickWindow>
 #include <QTimer>
 #include <QVariant>
 
+class QQmlComponent;
+class QQmlEngine;
 class QQuickItem;
-
-namespace PlasmaQuick
-{
-class SharedQmlEngine;
-}
 
 class FloatingToolTipDialog : public PlasmaQuick::PopupPlasmaWindow
 {
@@ -53,7 +51,11 @@ private:
     void updateSize();
 
     QPointer<QQuickItem> m_lastMainItem;
-    PlasmaQuick::SharedQmlEngine *m_qmlObject;
+    // Plasma 6.8 убрал PlasmaQuick::SharedQmlEngine — движок и компонент
+    // для запасного DefaultToolTip держим здесь сами.
+    QPointer<QQuickItem> m_defaultItem;
+    QQmlEngine *m_qmlEngine;
+    QQmlComponent *m_qmlComponent;
     QTimer m_hideTimer;
     int m_hideTimeout;
     bool m_interactive;
