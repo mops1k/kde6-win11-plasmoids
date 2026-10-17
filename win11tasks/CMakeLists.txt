@@ -24,10 +24,50 @@ find_package(KF6 REQUIRED COMPONENTS
 )
 find_package(Plasma REQUIRED)
 find_package(PlasmaQuick REQUIRED)
+find_package(PlasmaWaylandProtocols REQUIRED)
 find_package(PlasmaActivities REQUIRED)
 find_package(PlasmaActivitiesStats REQUIRED)
 find_package(KSysGuard REQUIRED)
 find_package(LibNotificationManager REQUIRED)
+
+# --- plasma-shell протокол -------------------------------------------------
+# Окну тултипа нужна роль plasma-shell tooltip (иначе KWin считает его обычным
+# окном и эффект HighlightWindow гасит его вместе с остальными). Заголовок
+# Qt-обёртки org_kde_plasma_surface требуется установленным заголовком
+# plasma-framework (plasmashellwaylandintegration.h); в системе нет
+# WaylandScannerConfig.cmake и пакета Qt6WaylandClient, поэтому генерируем
+# его напрямую wayland-scanner и qtwaylandscanner — как в
+# win11clock/notifications.
+find_program(WAYLAND_SCANNER_EXECUTABLE NAMES wayland-scanner REQUIRED)
+find_program(QTWAYLANDSCANNER_EXECUTABLE NAMES qtwaylandscanner
+    HINTS ${Qt6_DIR}/../../../qt6 /usr/lib/qt6 /usr/libexec)
+
+set(PLASMA_SHELL_XML ${PLASMA_WAYLAND_PROTOCOLS_DIR}/plasma-shell.xml)
+set(WAYLAND_GEN_DIR ${CMAKE_CURRENT_BINARY_DIR}/wayland)
+set(WAYLAND_INCLUDE_SUBDIR wayland-protocols)
+file(MAKE_DIRECTORY ${WAYLAND_GEN_DIR}/${WAYLAND_INCLUDE_SUBDIR})
+
+add_custom_command(
+    OUTPUT ${WAYLAND_GEN_DIR}/${WAYLAND_INCLUDE_SUBDIR}/wayland-plasma-shell-client-protocol.h
+    COMMAND ${WAYLAND_SCANNER_EXECUTABLE} client-header
+            ${PLASMA_SHELL_XML}
+            ${WAYLAND_GEN_DIR}/${WAYLAND_INCLUDE_SUBDIR}/wayland-plasma-shell-client-protocol.h
+    DEPENDS ${PLASMA_SHELL_XML}
+    COMMENT "Generating wayland-plasma-shell-client-protocol.h"
+)
+add_custom_command(
+    OUTPUT ${WAYLAND_GEN_DIR}/qwayland-plasma-shell.h
+    COMMAND ${QTWAYLANDSCANNER_EXECUTABLE} client-header
+            ${PLASMA_SHELL_XML}
+            --header-path=${WAYLAND_INCLUDE_SUBDIR}
+            > ${WAYLAND_GEN_DIR}/qwayland-plasma-shell.h
+    DEPENDS ${PLASMA_SHELL_XML}
+            ${WAYLAND_GEN_DIR}/${WAYLAND_INCLUDE_SUBDIR}/wayland-plasma-shell-client-protocol.h
+    COMMENT "Generating qwayland-plasma-shell.h"
+)
+add_custom_target(win11tasks_wayland_gen
+    DEPENDS ${WAYLAND_GEN_DIR}/qwayland-plasma-shell.h
+)
 
 add_definitions(-DTRANSLATION_DOMAIN=\"plasma_applet_org.mops1k.win11tasks\")
 
@@ -109,7 +149,13 @@ target_link_libraries(org.mops1k.win11tasks PRIVATE
 
 target_include_directories(org.mops1k.win11tasks PRIVATE
     ${CMAKE_CURRENT_BINARY_DIR}
+    # qwayland-plasma-shell.h и wayland-protocols/wayland-plasma-shell-client-protocol.h
+    ${WAYLAND_GEN_DIR}
 )
+
+# Сгенерированный заголовок протокола должен существовать до компиляции
+# floatingtooltipdialog.cpp.
+add_dependencies(org.mops1k.win11tasks win11tasks_wayland_gen)
 
 # Register QML sources with preserved subdirectory layout so relative imports
 # (import "code/LayoutMetrics.js", etc.) resolve inside the qrc.

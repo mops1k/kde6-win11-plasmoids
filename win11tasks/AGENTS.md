@@ -38,6 +38,28 @@ Plasma 6.8 удалила из libplasma класс `PlasmaQuick::SharedQmlEngin
 Удалить эти файлы можно, только если QML переедет на `PlasmaCore.ToolTipArea`
 (как в апстрим-таскбаре Plasma 6.8).
 
+## Роль окна тултипа (обязательно)
+
+`floatingtooltipdialog.*` обязан помечать окно ролью plasma-shell `tooltip`:
+`PlasmaShellWaylandIntegration::get(window)->setRole(QtWayland::org_kde_plasma_surface::role_tooltip)`
+(экспортируемый хелпер plasma-framework, заголовок
+`plasmaquick/plasmashellwaylandintegration.h` установлен в систему).
+Причина: без роли KWin считает тултип обычным окном, и эффект HighlightWindow
+(настройка `highlightWindows`, по умолчанию `true`) уводит его в opacity 0
+вместе с остальными окнами — исчезают и тултип, и превью.
+
+Свою plasma-shell поверхность создавать НЕЛЬЗЯ: для окна `PopupPlasmaWindow`
+она уже создана, вторая даёт протокольную ошибку
+`org_kde_plasma_shell_surface already exists`, из-за которой рвётся
+Wayland-соединение plasmashell и исчезает вся панель (`systemctl --user
+reset-failed plasma-plasmashell.service && systemctl --user start ...`).
+Именно поэтому используется хелпер plasma-framework, работающий с существующей
+поверхностью, а не KWayland/KWayland-client.
+
+Заголовок `qwayland-plasma-shell.h` для этого генерируется прямо в сборке
+(`wayland-scanner` + `qtwaylandscanner`, как в `win11clock/notifications`):
+в системе нет `WaylandScannerConfig.cmake` и пакета `Qt6WaylandClient`.
+
 ## Правила проекта
 
 - Язык общения, комментариев в документации и сообщений задач — русский;

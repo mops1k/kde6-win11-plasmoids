@@ -12,6 +12,11 @@
 #include <QQmlEngine>
 #include <QQuickItem>
 
+// plasma-framework: хелпер работает с уже созданной для окна plasma-shell
+// поверхностью (создавать вторую нельзя — KWin отвечает протокольной ошибкой
+// «org_kde_plasma_shell_surface already exists» и рвёт соединение целиком).
+#include <plasmaquick/plasmashellwaylandintegration.h>
+
 #include <KWindowSystem>
 
 FloatingToolTipDialog::FloatingToolTipDialog()
@@ -29,6 +34,9 @@ FloatingToolTipDialog::FloatingToolTipDialog()
         flags |= Qt::FramelessWindowHint;
     }
     setFlags(flags);
+
+    // Роль кэшируется хелпером и отправляется, когда появится поверхность окна.
+    applyToolTipRole();
 
     m_hideTimer.setSingleShot(true);
     connect(&m_hideTimer, &QTimer::timeout, this, [this]() {
@@ -101,8 +109,23 @@ QQuickItem *FloatingToolTipDialog::loadDefaultItem()
     return m_defaultItem;
 }
 
+void FloatingToolTipDialog::applyToolTipRole()
+{
+    // То же, что делает штатный ToolTipDialog из plasma-framework: окно
+    // помечается ролью tooltip и не забирает фокус. На неуместной платформе
+    // (X11) get() возвращает объект-заглушку и ничего не отправляет.
+    auto *integration = PlasmaShellWaylandIntegration::get(this);
+    if (!integration) {
+        return;
+    }
+
+    integration->setRole(QtWayland::org_kde_plasma_surface::role_tooltip);
+    integration->setTakesFocus(false);
+}
+
 void FloatingToolTipDialog::showEvent(QShowEvent *event)
 {
+    applyToolTipRole();
     keepalive();
     PlasmaQuick::PopupPlasmaWindow::showEvent(event);
 }

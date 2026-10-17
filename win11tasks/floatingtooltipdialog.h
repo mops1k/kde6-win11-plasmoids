@@ -49,6 +49,10 @@ private Q_SLOTS:
 
 private:
     void updateSize();
+    // Помечает окно тултипа ролью plasma-shell tooltip: без неё KWin считает
+    // тултип обычным окном, и эффект HighlightWindow («Скрывать другие окна
+    // при наведении на превью») гасит его вместе с остальными окнами.
+    void applyToolTipRole();
 
     QPointer<QQuickItem> m_lastMainItem;
     // Plasma 6.8 убрал PlasmaQuick::SharedQmlEngine — движок и компонент
