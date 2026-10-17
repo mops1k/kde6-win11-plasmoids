@@ -19,6 +19,7 @@ win11tray. Системный QML апплета `powerdevil` (v6.7.5) скоп�
 ./scripts/package.sh                     # dist/org.mops1k.win11battery-<версия>.plasmoid
 kpackagetool6 --type Plasma/Applet --install dist/*.plasmoid
 ./scripts/install-local.sh [--no-restart]
+./scripts/install-local.sh --prebuilt-dir <prebuilt>   # готовый .plasmoid из релиза
 ./scripts/switch-battery.sh [--revert] [--no-restart]   # правка appletsrc при остановленном plasmashell
 ./scripts/uninstall-local.sh [--restore]
 ```

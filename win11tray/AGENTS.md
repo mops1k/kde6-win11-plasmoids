@@ -16,6 +16,7 @@ KPackage в `~/.local/share/plasma/plasmoids/` ставить НЕЛЬЗЯ (да
 ```bash
 ./scripts/install-local.sh          # сборка + установка в ~/.local + рестарт plasmashell
 ./scripts/install-local.sh --no-build
+./scripts/install-local.sh --prebuilt-dir <prebuilt>   # готовый .so из релиза, без сборки
 ./scripts/uninstall-local.sh [--restore]
 ./scripts/switch-tray.sh [--revert] [--no-restart]   # замена системного трея в панели (с бэкапом appletsrc)
 ```

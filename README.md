@@ -35,7 +35,61 @@
 
 ![Всплывающее уведомление](docs/screenshots/toast.png)
 
-## Установка
+## Установка без сборки (готовый релиз)
+
+Релизы собираются в CI ([`.github/workflows/release.yml`](.github/workflows/release.yml),
+тег `v*`) и содержат уже скомпилированные C++-плазмоиды `win11tray`/`win11tasks`,
+QML-плагин уведомлений, `.plasmoid` для QML-плазмоидов и переводы. Компилятор
+и cmake не нужны:
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/mops1k/kde6-win11-plasmoids/main/scripts/online-install.sh | bash
+```
+
+Скрипт находит последний релиз, проверяет sha256, распаковывает архив в
+`~/.cache/win11-plasmoids/<тег>` и запускает установщик из самого архива.
+Варианты запуска:
+
+```bash
+# без интерактивного выбора
+curl -fsSL .../scripts/online-install.sh | bash -s -- --all
+curl -fsSL .../scripts/online-install.sh | bash -s -- --only win11tray,win11clock --no-restart
+curl -fsSL .../scripts/online-install.sh | bash -s -- --tag v0.1.0   # конкретная версия
+curl -fsSL .../scripts/online-install.sh | bash -s -- --list         # список релизов
+
+# уже скачанный архив (без сети)
+bash scripts/online-install.sh --from ~/Загрузки/win11-plasmoids-v0.1.0-x86_64-arch.tar.gz --all
+```
+
+Вручную, без однострочника:
+
+```bash
+curl -LO <ссылка на архив релиза>          # и на тот же файл с суффиксом .sha256
+sha256sum -c win11-plasmoids-v0.1.0-x86_64-arch.tar.gz.sha256
+tar xzf win11-plasmoids-v0.1.0-x86_64-arch.tar.gz
+cd win11-plasmoids-v0.1.0
+./scripts/install.sh --prebuilt-dir prebuilt --all --no-restart
+```
+
+Что важно знать:
+
+- готовые C++-артефакты собраны для Arch-семейства, x86_64, Plasma 6.8 / Qt 6.12.
+  Установщик сверяет версии Plasma и Qt и проверяет `ldd` по каждому `.so`;
+  если система старше, `win11tray`, `win11tasks` и QML-плагин `win11clock`
+  собираются из исходников (тогда нужны пакеты из раздела «Требования»),
+  а `.plasmoid` QML-плазмоидов ставятся из релиза как есть. `--no-fallback`
+  вместо отката останавливает установку;
+- установка идёт в `~/.local`, root не нужен; панель по-прежнему
+  переключается на свои плазмоиды (отключается `--no-switch`/`--no-restart`);
+- QML-плазмоид можно поставить и вовсе без скриптов: к релизу приложены файлы
+  `org.mops1k.win11*.plasmoid` (ПКМ по панели → «Добавить виджеты» →
+  «Установить из файла…»), но перевода и автопереключения в панели тогда нет;
+- зависимости установки: `bash`, `curl`, `tar`, `python3`, `kpackage`
+  (утилита `kpackagetool6`) и `systemd`; для `win11battery` — `powerdevil`.
+
+Проверка релиза без установки: `bash scripts/online-install.sh --list`.
+
+## Сборка и установка из исходников
 
 ### 1. Требования
 
@@ -70,7 +124,14 @@ cd kde6-win11-plasmoids
 ./scripts/install.sh --only win11tray,win11clock
 ./scripts/install.sh --list       # только показать список
 ./scripts/install.sh --no-switch  # установить, но не трогать панель
+
+./scripts/install.sh --release              # то же, но готовым релизом (без сборки)
+./scripts/install.sh --prebuilt-dir <dir>/prebuilt   # из распакованного релиза
 ```
+
+Флаги `--release [тег]` и `--prebuilt-dir <каталог>` переключают установщик на
+готовые артефакты (см. раздел «Установка без сборки»); без них скрипт собирает
+C++-части локально.
 
 Выбор плазмоидов — диалог `zenity --list --checklist`; если zenity или
 графическая сессия недоступны, используется whiptail, затем текстовое

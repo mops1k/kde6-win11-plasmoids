@@ -9,6 +9,9 @@
 #   --list                показать плазмоиды и выйти
 #   --all                 установить все
 #   --only <a,b|a b>      установить только перечисленные (можно повторять)
+#   --prebuilt-dir <dir>  поставить готовые артефакты релиза (prebuilt/), без сборки
+#   --release [tag]       скачать релиз с GitHub и установить его (без сборки)
+#   --no-fallback         не откатываться к сборке из исходников при несовместимости
 #   --no-build            не пересобирать C++-плазмоиды (использовать build/)
 #   --no-switch           не переключать плазмоиды в панели
 #   --no-restart          не перезапускать plasmashell (переключение пропускается)
@@ -52,10 +55,14 @@ declare -A PLUGIN_DESC=(
 BUILD=1
 RESTART=1
 SWITCH=1
+NO_FALLBACK=0
+USE_RELEASE=0
+RELEASE_TAG=""
+PREBUILT_DIR="${PREBUILT_DIR:-}"
 MODE=""          # list | all | only | interactive
 ONLY=()
 
-usage() { sed -n '2,15p' "$0" | sed 's/^# \{0,1\}//'; }
+usage() { awk 'NR > 1 && /^#/ { sub(/^# ?/, ""); print; next } NR > 1 { exit }' "$0"; }
 
 fail() { echo "Ошибка: $*" >&2; exit 2; }
 
@@ -165,15 +172,23 @@ ask_interactive() {
     normalize_selection $answer
 }
 
-# Проверка внешних утилит для выбранных плазмоидов.
+# Проверка внешних утилит для выбранных плазмоидов: при установке из готового
+# релиза компилятор и cmake не нужны.
 check_deps() {
     local -a need=()
     local p
     for p in "$@"; do
-        case "${PLUGIN_KIND[$p]}" in
-            C++) need+=(cmake c++) ;;
-            QML) need+=(kpackagetool6 msgfmt) ;;
-        esac
+        if prebuilt_used "$p"; then
+            case "${PLUGIN_KIND[$p]}" in
+                C++) need+=(python3) ;;
+                QML) need+=(kpackagetool6 python3) ;;
+            esac
+        else
+            case "${PLUGIN_KIND[$p]}" in
+                C++) need+=(cmake c++) ;;
+                QML) need+=(kpackagetool6 msgfmt) ;;
+            esac
+        fi
     done
     local -A uniq=()
     local t missing=()
@@ -189,6 +204,74 @@ check_deps() {
     fi
 }
 
+# Ставится ли плазмоид из готового релиза (1) или собирается из исходников (0).
+declare -A APP_PREBUILT=()
+
+prebuilt_used() { [ "${APP_PREBUILT[$1]:-0}" = 1 ]; }
+
+# Сверяет готовые артефакты релиза с системой. При несовместимости (другая
+# версия Plasma/Qt, нет библиотек) переводит C++-части на сборку из исходников;
+# QML-плазмоиды (.plasmoid) архитектурно-независимы и остаются из релиза.
+prebuilt_prepare() {
+    local p bad=0
+    for p in "$@"; do
+        APP_PREBUILT[$p]=0
+    done
+    [ -n "$PREBUILT_DIR" ] || return 0
+
+    . "$REPO_ROOT/scripts/prebuilt-lib.sh"
+    prebuilt_require || exit 2
+    echo "==> Проверка готовых артефактов: $PREBUILT_DIR (релиз $(prebuilt_field tag))"
+    prebuilt_check_versions || bad=1
+
+    for p in "$@"; do
+        case "$p" in
+            win11tray|win11tasks)
+                prebuilt_check_so "$PREBUILT_DIR/qt6-plugins/plasma/applets/${PLUGIN_APP[$p]}.so" || bad=1
+                ;;
+            win11clock)
+                prebuilt_check_dir "$PREBUILT_DIR/qt6-qml/org/mops1k/win11clock/notifications" || bad=1
+                ;;
+        esac
+    done
+
+    if [ "$bad" = 0 ]; then
+        for p in "$@"; do
+            APP_PREBUILT[$p]=1
+        done
+        echo "==> Готовые артефакты подходят: сборка не потребуется"
+        return 0
+    fi
+
+    if [ "$NO_FALLBACK" = 1 ]; then
+        fail "готовые артефакты релиза несовместимы с системой (см. сообщения выше);
+      возьмите релиз под свою версию Plasma/Qt или запустите без --prebuilt-dir"
+    fi
+
+    local missing=()
+    for t in cmake c++; do
+        command -v "$t" >/dev/null 2>&1 || missing+=("$t")
+    done
+    if ((${#missing[@]})); then
+        fail "готовые артефакты несовместимы с системой, а для сборки не хватает: ${missing[*]}
+      Установите пакеты для сборки (см. README, раздел «Требования») и повторите."
+    fi
+
+    echo "==> ВНИМАНИЕ: готовые C++-артефакты несовместимы с системой —" >&2
+    echo "    win11tray, win11tasks и QML-плагин win11clock будут собраны из исходников." >&2
+    for p in win11tray win11tasks win11clock; do
+        if [ -n "${APP_PREBUILT[$p]+x}" ]; then
+            APP_PREBUILT[$p]=0
+        fi
+    done
+    for p in win11battery win11keyboardlayout; do
+        if [ -n "${APP_PREBUILT[$p]+x}" ]; then
+            APP_PREBUILT[$p]=1
+        fi
+    done
+    return 0
+}
+
 install_one() {
     local p="$1"
     local dir="$REPO_ROOT/$p"
@@ -197,6 +280,9 @@ install_one() {
     [ -x "$script" ] || fail "нет исполняемого скрипта $script"
 
     local -a args=(--no-restart)
+    if prebuilt_used "$p"; then
+        args+=(--prebuilt-dir "$PREBUILT_DIR")
+    fi
     if [ "${PLUGIN_KIND[$p]}" = "C++" ] && [ "$BUILD" = 0 ]; then
         args+=(--no-build)
     fi
@@ -276,6 +362,15 @@ while (($#)); do
             IFS=', ' read -r -a _parts <<<"${1#--only=}"
             ONLY+=("${_parts[@]}")
             ;;
+        --prebuilt-dir)
+            shift
+            (($#)) || fail "--prebuilt-dir требует каталог"
+            PREBUILT_DIR="$1"
+            ;;
+        --prebuilt-dir=*) PREBUILT_DIR="${1#--prebuilt-dir=}" ;;
+        --release) USE_RELEASE=1 ;;
+        --release=*) USE_RELEASE=1; RELEASE_TAG="${1#--release=}" ;;
+        --no-fallback) NO_FALLBACK=1 ;;
         --no-build) BUILD=0 ;;
         --no-switch) SWITCH=0 ;;
         --no-restart) RESTART=0 ;;
@@ -288,6 +383,27 @@ done
 if [ "$MODE" = "list" ]; then
     list_plugins
     exit 0
+fi
+
+if [ "$USE_RELEASE" = 1 ]; then
+    [ -n "$PREBUILT_DIR" ] && fail "--release и --prebuilt-dir несовместимы"
+    bootstrap="$REPO_ROOT/scripts/online-install.sh"
+    [ -x "$bootstrap" ] || fail "нет исполняемого $bootstrap"
+    rel_args=()
+    [ -n "$RELEASE_TAG" ] && rel_args+=(--tag "$RELEASE_TAG")
+    case "$MODE" in
+        all) rel_args+=(--all) ;;
+        only) rel_args+=(--only "$(IFS=,; echo "${ONLY[*]}")") ;;
+    esac
+    [ "$SWITCH" = 1 ] || rel_args+=(--no-switch)
+    [ "$RESTART" = 1 ] || rel_args+=(--no-restart)
+    [ "$NO_FALLBACK" = 1 ] && rel_args+=(--no-fallback)
+    echo "==> Установка готового релиза с GitHub (без сборки)"
+    exec "$bootstrap" "${rel_args[@]}"
+fi
+
+if [ -n "$PREBUILT_DIR" ]; then
+    PREBUILT_DIR="$(cd "$PREBUILT_DIR" && pwd)" || fail "нет каталога $PREBUILT_DIR"
 fi
 
 declare -a SELECTED=()
@@ -307,6 +423,7 @@ esac
 ((${#SELECTED[@]})) || { echo "Ничего не выбрано."; exit 0; }
 
 echo "К установке: ${SELECTED[*]}"
+prebuilt_prepare "${SELECTED[@]}"
 check_deps "${SELECTED[@]}"
 
 ok=0; bad=0

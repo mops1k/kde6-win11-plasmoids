@@ -38,6 +38,27 @@ Plasma 6: `win11tray`, `win11tasks` (C++/CMake) и `win11battery`,
 - Правка `~/.config/plasma-org.kde.plasma.desktop-appletsrc` — только с
   бэкапом и при остановленном `plasmashell` (скрипты проектов делают это сами).
 
+## Релизы и установка без сборки
+
+- Готовый релиз собирает `./scripts/package-release.sh` (`--tag`, `--out-dir`):
+  архив `dist/win11-plasmoids-<тег>-<arch>-<distro>.tar.gz` с деревом репозитория
+  и каталогом `prebuilt/` (собранные `.so`, QML-модуль уведомлений, `.plasmoid`,
+  `.mo`, `manifest.json` с версиями Qt/Plasma и sha256), плюс `.sha256` и
+  отдельные `.plasmoid`. Артефакты в git не попадают — это только ассеты релиза.
+- CI: `.github/workflows/release.yml` на тег `v*` (и вручную) собирает архив в
+  контейнере `archlinux:base-devel`, проверяет установку в подставной `HOME` и
+  публикует GitHub Release. Процесс выпуска — `docs/RELEASE.md`.
+- Установка без сборки: `scripts/online-install.sh` (`--tag`, `--from`,
+  `--list`) скачивает релиз, проверяет sha256 и вызывает
+  `scripts/install.sh --prebuilt-dir <архив>/prebuilt`; у `install.sh` также
+  есть `--release [тег]` и `--no-fallback`.
+- Общие функции для `prebuilt/` — `scripts/prebuilt-lib.sh`; каждый
+  `win11*/scripts/install-local.sh` обязан принимать `--prebuilt-dir` и при
+  нём не вызывать cmake/msgfmt.
+- Релиз проверяется установкой в подставной `HOME`
+  (`XDG_DATA_HOME`/`XDG_CONFIG_HOME` + `--no-restart --no-switch`), а не в
+  живой `~/.local`.
+
 ## Проверка изменений
 
 - C++: `cmake -S <проект> -B <проект>/build -DCMAKE_BUILD_TYPE=Release

@@ -48,6 +48,7 @@ blacklist истории не применяется: в нём есть `@other
 ```bash
 ./scripts/package.sh                          # dist/org.mops1k.win11clock-<версия>.plasmoid (KPackage)
 ./scripts/install-local.sh [--no-build] [--no-restart]
+./scripts/install-local.sh --prebuilt-dir <prebuilt>   # готовый QML-модуль и .plasmoid из релиза
 ./scripts/switch-clock.sh [--revert] [--no-restart]   # замена digitalclock в appletsrc
 ./scripts/uninstall-local.sh [--restore]
 ```

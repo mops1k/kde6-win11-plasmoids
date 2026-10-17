@@ -1,0 +1,115 @@
+name: release
+
+# Сборка готового релиза плазмоидов Win11 (без сборки на стороне пользователя).
+# Запуск: push тега вида v0.1.0 либо вручную (workflow_dispatch) с указанием тега.
+# Результат: архив win11-plasmoids-<tag>-<arch>-arch.tar.gz, его .sha256 и
+# отдельные .plasmoid как ассеты GitHub Release.
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: 'Тег релиза (например v0.1.0)'
+        required: true
+        type: string
+      upload:
+        description: 'Опубликовать GitHub Release с артефактами'
+        required: false
+        type: boolean
+        default: true
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container:
+      image: archlinux:base-devel
+      options: --user root
+    steps:
+      - name: Зависимости сборки (Arch)
+        run: |
+          pacman -Sy --noconfirm archlinux-keyring
+          pacman -Syu --noconfirm --needed \
+            base-devel cmake extra-cmake-modules kpackage gettext \
+            qt6-wayland wayland plasma-workspace plasma-wayland-protocols \
+            plasma-activities plasma-activities-stats libksysguard \
+            python git github-cli curl tar
+
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Разрешить git в контейнере
+        run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
+
+      - name: Определить тег
+        id: version
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            echo "tag=${{ inputs.tag }}" >>"$GITHUB_OUTPUT"
+          else
+            echo "tag=${GITHUB_REF_NAME}" >>"$GITHUB_OUTPUT"
+          fi
+
+      - name: Сборка архива релиза
+        run: ./scripts/package-release.sh --tag "${{ steps.version.outputs.tag }}"
+
+      - name: Проверка установки из архива (подставной HOME)
+        run: |
+          set -euo pipefail
+          tag="${{ steps.version.outputs.tag }}"
+          tmp="$(mktemp -d)"
+          tar -xzf dist/*.tar.gz -C "$tmp"
+          release_dir="$(echo "$tmp"/win11-plasmoids-*)"
+          # В контейнере нет user-systemd: подставляем systemctl-заглушку для
+          # daemon-reload, установщик не должен зависеть от живой сессии.
+          mkdir -p "$tmp/bin"
+          printf '#!/bin/sh\nexit 0\n' >"$tmp/bin/systemctl"
+          chmod +x "$tmp/bin/systemctl"
+          PATH="$tmp/bin:$PATH" HOME="$tmp/home" \
+            XDG_DATA_HOME="$tmp/home/.local/share" \
+            XDG_CONFIG_HOME="$tmp/home/.config" \
+            bash "$release_dir/scripts/install.sh" \
+              --prebuilt-dir "$release_dir/prebuilt" \
+              --all --no-restart --no-switch
+          test -f "$tmp/home/.local/lib/qt6/plugins/plasma/applets/org.mops1k.win11tray.so"
+          test -d "$tmp/home/.local/lib/qt6/qml/org/mops1k/win11clock/notifications"
+          test -d "$tmp/home/.local/share/plasma/plasmoids/org.mops1k.win11clock"
+          echo "Установка из архива $tag прошла успешно"
+
+      - name: Публикация GitHub Release
+        if: ${{ github.event_name == 'push' || inputs.upload }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          tag="${{ steps.version.outputs.tag }}"
+          cat >/tmp/notes.md <<'EOF'
+          Готовые артефакты плазмоидов Win11 — сборка из исходников не нужна.
+
+          Установка одной командой (Arch-семейство, x86_64):
+
+          ```bash
+          curl -fsSL https://raw.githubusercontent.com/mops1k/kde6-win11-plasmoids/main/scripts/online-install.sh | bash
+          ```
+
+          Явно указать версию и набор плазмоидов:
+
+          ```bash
+          curl -fsSL https://raw.githubusercontent.com/mops1k/kde6-win11-plasmoids/main/scripts/online-install.sh | bash -s -- --tag TAG --all
+          ```
+
+          Вручную: скачать архив, проверить `sha256sum -c`, распаковать и запустить
+          `./scripts/install.sh --prebuilt-dir prebuilt`. Отдельные `*.plasmoid`
+          ставятся через «Добавить виджеты → Установить из файла…».
+
+          Подробности — в README.md репозитория.
+          EOF
+          if ! gh release view "$tag" >/dev/null 2>&1; then
+            gh release create "$tag" --title "$tag" --notes-file /tmp/notes.md
+          fi
+          gh release upload "$tag" dist/*.tar.gz dist/*.sha256 dist/*.plasmoid --clobber
