@@ -91,9 +91,12 @@ api_curl() {
     fi
 }
 
-# Разбор JSON релиза: печатает "<тег> <url архива> <url sha256 или -> <имя файла>".
+# Разбор JSON релиза: читает его со stdin, печатает
+# "<тег> <url архива> <url sha256 или -> <имя файла>".
+# Внимание: именно python3 -c (а не `python3 - <<PY`), иначе python занимает
+# stdin собственным скриптом и JSON не читается.
 parse_release() {
-    python3 - <<'PY'
+    python3 -c '
 import json
 import sys
 
@@ -106,8 +109,7 @@ checksum = next((a for a in assets if a["name"] == tarball["name"] + ".sha256"),
 print(data.get("tag_name") or "unknown",
       tarball["browser_download_url"],
       checksum["browser_download_url"] if checksum else "-",
-      tarball["name"])
-PY
+      tarball["name"])'
 }
 
 if [ "$SHOW_LIST" = 1 ]; then
