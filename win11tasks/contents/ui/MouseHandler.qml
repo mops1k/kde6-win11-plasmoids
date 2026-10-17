@@ -37,11 +37,19 @@ DropArea {
             return;
         }
 
+        // Событие перетаскивания приходит в координатах DropArea, а target
+        // (список задач) может быть смещён внутри виджета: иконки центрируются
+        // по настройке iconAlignment, в зеркальной раскладке список тоже
+        // смещается. Переводим координаты в систему target, иначе childAt()
+        // выходит за границы списка, возвращает null и переупорядочивание
+        // задач не выполняется.
+        const pos = dropArea.mapToItem(target, event.x, event.y);
+
         let above;
         if (isGroupDialog) {
-            above = target.itemAt(event.x, event.y);
+            above = target.itemAt(pos.x, pos.y);
         } else {
-            above = target.childAt(event.x, event.y);
+            above = target.childAt(pos.x, pos.y);
         }
 
         if (!above) {
@@ -177,7 +185,20 @@ DropArea {
                 rotation += 15;
                 increment--;
             }
-            const anchor = dropArea.target.childAt(event.x, event.y);
+            // Якорь — задача под курсором. Ищем её по наведению, а не по
+            // координатам события: система координат WheelHandler и системы
+            // координат target не совпадают, когда список задач смещён внутри
+            // виджета (центрирование иконок, зеркальная раскладка), и childAt()
+            // в этом случае возвращает null. По смыслу настроек нужна именно
+            // наведённая задача («hovered task»).
+            let anchor = null;
+            for (let i = 0; i < dropArea.target.children.length; ++i) {
+                const item = dropArea.target.children[i];
+                if (item.containsMouse === true) {
+                    anchor = item;
+                    break;
+                }
+            }
             if (Plasmoid.configuration.wheelEnabled === 3) {
                 const loudest = anchor?.audioStreams?.reduce((loudest, stream) => Math.max(loudest, stream.volume), 0)
                 const step = (pulseAudio.item.normalVolume - pulseAudio.item.minimalVolume) * pulseAudio.item.globalConfig.volumeStep / 100;
