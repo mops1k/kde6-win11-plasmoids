@@ -55,7 +55,10 @@ def set_value(block, key, value):
 
 
 def is_child_of(header, parent):
-    return header.startswith(parent + "][Applets][") and header.count("[Applets]") == parent.count("[Applets]") + 1
+    prefix = parent + "][Applets]["
+    # Только сами апплеты ([...][Applets][N]), не их подгруппы Configuration/General
+    # и не вложенные контейнеры: иначе int() падает на «General».
+    return header.startswith(prefix) and header[len(prefix):].isdigit()
 
 
 def write_blocks(path, blocks):
