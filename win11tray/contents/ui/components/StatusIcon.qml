@@ -27,6 +27,9 @@ Item {
     // Правый клик по значку: у значка своё контекстное меню (сеть, звук,
     // яркость, батарея), как в Windows 11, а не меню апплета трея.
     signal rightClicked
+    // Прокрутка колеса над значком (используется значком звука для изменения
+    // громкости, как в Windows 11).
+    signal wheel(var wheel)
 
     implicitWidth: iconSize + 2 * iconPadding
     implicitHeight: implicitWidth
@@ -64,6 +67,12 @@ Item {
             } else {
                 root.clicked();
             }
+        }
+        onWheel: wheel => {
+            root.wheel(wheel);
+            // Событие принято: иначе прокрутка уходит панели и может
+            // сработать как переключение рабочих столов/скролл панели.
+            wheel.accepted = true;
         }
     }
 }

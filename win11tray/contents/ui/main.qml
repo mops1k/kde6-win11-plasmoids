@@ -593,6 +593,7 @@ ContainmentItem {
                 showVolume: Plasmoid.configuration.showStatusVolume
                 showBrightness: Plasmoid.configuration.showStatusBrightness
                 showBattery: Plasmoid.configuration.showStatusBattery
+                volumeScrollStep: Plasmoid.configuration.volumeScrollStep
                 leadingGap: Plasmoid.configuration.statusGap
 
                 onIconClicked: systemTrayState.toggleQuickSettings()

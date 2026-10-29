@@ -40,6 +40,7 @@ KCMUtils.ScrollViewKCM {
     property bool cfg_showStatusVolume
     property bool cfg_showStatusBrightness
     property bool cfg_showStatusBattery
+    property int cfg_volumeScrollStep
     property int cfg_statusGap
     property list<string> cfg_shownItems: []
     property list<string> cfg_hiddenItems: []
@@ -386,6 +387,18 @@ KCMUtils.ScrollViewKCM {
                 text: i18nc("@option:check System status row icon in the panel", "Battery")
                 checked: iconsPage.cfg_showStatusBattery
                 onToggled: iconsPage.cfg_showStatusBattery = checked
+            }
+
+            QQC2.SpinBox {
+                id: volumeScrollStepChooser
+
+                Kirigami.FormData.label: i18nc("@label:spinbox Volume change step in percent when scrolling the mouse wheel over the sound icon", "Sound wheel step (%):")
+                Layout.preferredWidth: formLayout.maxComboboxWidth
+                from: 1
+                to: 50
+                stepSize: 1
+                value: iconsPage.cfg_volumeScrollStep
+                onValueModified: iconsPage.cfg_volumeScrollStep = value
             }
 
             QQC2.SpinBox {

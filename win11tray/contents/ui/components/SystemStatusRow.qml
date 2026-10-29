@@ -5,6 +5,7 @@
 
 import QtQuick
 import QtQuick.Layouts
+import QtQuick.Window
 
 import org.kde.kcmutils
 import org.kde.kirigami as Kirigami
@@ -16,6 +17,7 @@ import org.kde.plasma.private.battery
 import org.kde.plasma.private.batterymonitor
 import org.kde.plasma.private.brightnesscontrolplugin
 import org.kde.plasma.private.volume as Vol
+import org.kde.plasma.workspace.osd
 
 import "../js/funcs.js" as Funcs
 
@@ -40,6 +42,16 @@ Item {
     // сливается в одно. Внутри самого ряда отступ маленький и фиксированный
     // (StatusIcon.iconPadding), настройка «Spacing» трея на ряд не влияет.
     property real leadingGap: Kirigami.Units.largeSpacing * 2
+
+    // Шаг изменения громкости колесом мыши, в процентах (настройка трея).
+    property int volumeScrollStep: 5
+
+    // Экран панели: OSD-окно не может надёжно спросить Screen до первого
+    // показа (у скрытого окна экран ещё не определён).
+    readonly property int osdScreenX: Screen.virtualX
+    readonly property int osdScreenY: Screen.virtualY
+    readonly property int osdScreenWidth: Screen.width
+    readonly property int osdScreenHeight: Screen.height
 
     // Имя значка, по которому кликнули ("network", "volume", "brightness",
     // "battery"), либо пустая строка при клике по свободной области ряда.
@@ -108,6 +120,25 @@ Item {
         menu.openRelative();
     }
 
+    // Прокрутка колеса над значком звука меняет громкость устройства вывода,
+    // как в Windows 11. Выше 100% не поднимаем: у устройства может быть запас
+    // до 150%, но колесом — только до номинала.
+    function changeVolume(delta) {
+        const sink = Vol.PreferredDevice.sink;
+        if (!sink || sink.name === "auto_null") {
+            return;
+        }
+        const step = Math.max(1, root.volumeScrollStep) * 65536 / 100;
+        // Уровень всегда кратен шагу: 5% → 0, 5, 10, …, 100.
+        let volume = sink.volume + (delta > 0 ? step : -step);
+        volume = Math.round(volume / step) * step;
+        volume = Math.max(0, Math.min(65536, volume));
+        sink.volume = volume;
+        // Как в слайдере поповера: ноль глушит, прокрутка вверх снимает mute.
+        sink.muted = volume === 0;
+        volumeOsd.showLevel(volume, sink.muted);
+    }
+
     // Свободная область ряда (если между значками есть место) тоже открывает
     // сводный поповер.
     MouseArea {
@@ -140,6 +171,11 @@ Item {
             source: Funcs.volIconName(sink ? sink.volume : 0, sink ? sink.muted : true)
             onClicked: root.iconClicked(name)
             onRightClicked: root.openIconMenu(volumeMenu, volumeIcon)
+            onWheel: wheel => {
+                if (wheel.angleDelta.y !== 0) {
+                    root.changeVolume(wheel.angleDelta.y);
+                }
+            }
 
             readonly property var sink: Vol.PreferredDevice.sink
         }
@@ -172,6 +208,35 @@ Item {
                 charging: batteryControl.pluggedIn
             }
         }
+    }
+
+    // OSD уровня громкости при прокрутке колесом: штатное окно Plasma
+    // (модуль org.kde.plasma.workspace.osd). Встроенного автоскрытия у окна
+    // нет — его делает таймер, как в plasma-pa.
+    Osd {
+        id: volumeOsd
+
+        visible: false
+        timeout: 1800
+        osdMaxValue: 100
+        showingProgress: true
+
+        // По центру экрана, ближе к нижней части — как OSD Plasma.
+        x: Math.round(root.osdScreenX + (root.osdScreenWidth - width) / 2)
+        y: Math.round(root.osdScreenY + root.osdScreenHeight * 0.8)
+
+        function showLevel(volume, muted) {
+            osdValue = Math.round(volume / 65536 * 100);
+            icon = Funcs.volIconName(volume, muted);
+            visible = true;
+            hideTimer.restart();
+        }
+    }
+
+    Timer {
+        id: hideTimer
+        interval: volumeOsd.timeout
+        onTriggered: volumeOsd.visible = false
     }
 
     // --- Контекстное меню значка сети ---------------------------------------
